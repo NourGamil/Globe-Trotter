@@ -1,20 +1,40 @@
 "use client";
 import Image from "next/image";
-import Navbar from "../../components/navbar";
+import Navbar from "./components/navbar";
 import { useState } from "react";
 import { gsap, random } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
-
-
+import Loader from "./components/loading";
 gsap.registerPlugin(ScrollToPlugin);
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(useGSAP);
 
 export default function Home() {
-
+  const [loading, setLoading] = useState(true);
   useGSAP(() => {
+    const images = document.images;
+    let loaded = 0;
+    if (images.length === 0) {
+      setLoading(false);
+      return;
+    }
+    const handleLoad = () => {
+      loaded++;
+      if (loaded === images.length) {
+        setLoading(false);
+      }
+    };
+    for (let img of images) {
+      if (img.complete) {
+        handleLoad();
+      } else {
+        img.addEventListener("load", handleLoad);
+        img.addEventListener("error", handleLoad);
+      }
+    }
+
   let switchBtn = document.querySelector(".switchBtn")
   let discoverBtn = document.querySelector(".discoverBtn")
   let backBtn = document.querySelector(".backBtn")
@@ -547,6 +567,9 @@ function themeChangerLight(){
     discoverBtn.addEventListener("click", discoverBtnClick)
 
     function backBtnClick(){
+      gsap.to(window,{
+      scrollTo:".scrollHere"
+    })
     mainTlBackBtn.to(".discoverAnime1",{
       width:150,
       height:150,
@@ -1170,557 +1193,561 @@ function themeChangerLight(){
   }, []);
 
   return (
-<div className="webSite">
 
-      <div className="nav fixed top-0 left-0 z-100">
-        <Navbar />
-      </div>
+  <>
+    {loading && <Loader />}
+      <div className="webSite" style={{ display: loading ? "none" : "block" }}>
 
-      <div className="backBtn
-      max-lg:hidden
-      fixed top-[100px] right-0 z-100 h-[40px] w-[60px] flex justify-center items-center gap-[20px] text-[var(--tx1)] bg-[#00000033] rounded-l-full cursor-pointer hidden">
-        <div className="relative z-100 h-[100px] w-[200px] flex justify-center items-center gap-[20px]">
-        <div className="">
-          <img src="images/x dark.svg" alt="" className="w-[40px] h-[40px]" />
-        </div>
-        <div className="discoverAnime1 absolute top-[50%] left-[50%] w-[20px] h-[20px] -translate-y-[50%] -translate-x-[50%] rounded-full bg-[var(--tx1)] opacity-70 hidden"></div></div>
-      </div>
-
-      <div className="share hidden 
-      max-sm:hidden fixed bottom-10 left-10  flex-col items-center w-[100px] h-[100px] justify-between text-[0.9rem] mr-[100px] text-[var(--tx1)] z-110">
-              <div className="rotate-270 mt-[-40px]">SHARE</div>
-              <div className=" w-[0] h-[30px] mt-[30px] border-1 border-[var(--tx)]"></div>
-              <div className=" w-[20px] h-[30px] ">
-                <img className="shareSvg w-[30px] h-[30px] " src="images/share.svg" alt="" />
-              </div>
-      </div>
-
-    <div className="main relative w-[100vw] h-[100vh] overflow-hidden">
-
-      <div className="listAll absolute w-[100vw] h-[100vh] top-0 left-0 z-110 hidden">
-        <div className="
-        max-xl:w-[100%]
-        max-xl:h-[25%]
-        listImg1 relative w-[25%] h-[100%] ">
-          <div className="listImg1Btn absolute top-0 left-0 z-111 text-[#00000000] bg-[#00000033] w-[100%] h-[100%] text-[2rem] hover:bg-[#000000cc] hover:text-[white]  transition-[0.5s] uppercase flex justify-center items-center cursor-pointer">
-            Discover
-          </div>
-          <div className=" absolute top-20 left-0 z-110 text-[#fff]  w-[100%] h-[100%] text-[2rem] hover:text-[#ffffff00] uppercase flex justify-center items-center cursor-pointer">
-            Highlands
-          </div>
-          <img className="listImg1Src absolute top-0 left-0 w-[100%] h-[100%]" src="images/scotland2.jpg" alt="" /></div>
-        <div className="
-        max-xl:w-[100%]
-        max-xl:h-[25%]
-        listImg2 relative w-[25%] h-[100%] ">
-          <div className="listImg2Btn absolute top-0 left-0 z-111 text-[#00000000] bg-[#00000033] w-[100%] h-[100%] text-[2rem] hover:bg-[#000000cc] hover:text-[white]  transition-[0.5s] uppercase flex justify-center items-center cursor-pointer">
-            Discover
-          </div>
-          <div className=" absolute top-20 left-0 z-110 text-[#fff]  w-[100%] h-[100%] text-[2rem] hover:text-[#ffffff00] uppercase flex justify-center items-center cursor-pointer">
-            Sahara
-          </div>
-          <img className="listImg2Src absolute top-0 left-0 w-[100%] h-[100%]" src="images/sahara4.jpg" alt="" /></div>
-        <div className="
-        max-xl:w-[100%]
-        max-xl:h-[25%]
-        listImg3 relative w-[25%] h-[100%] ">
-          <div className="listImg3Btn absolute top-0 left-0 z-111 text-[#00000000] bg-[#00000033] w-[100%] h-[100%] text-[2rem] hover:bg-[#000000cc] hover:text-[white]  transition-[0.5s] uppercase flex justify-center items-center cursor-pointer">
-            Discover
-          </div>
-          <div className=" absolute top-20 left-0 z-110 text-[#fff]  w-[100%] h-[100%] text-[2rem] hover:text-[#ffffff00] uppercase flex justify-center items-center cursor-pointer">
-            Dolomites
-          </div>
-          <img className="listImg3Src absolute top-0 left-0 w-[100%] h-[100%]" src="images/dolomites2.jpg" alt="" /></div>
-        <div className="
-        max-xl:w-[100%]
-        max-xl:h-[25%]
-        listImg4 relative w-[25%] h-[100%] ">
-          <div className="listImg4Btn absolute top-0 left-0 z-111 text-[#00000000] bg-[#00000033] w-[100%] h-[100%] text-[2rem] hover:bg-[#000000cc] hover:text-[white]  transition-[0.5s] uppercase flex justify-center items-center cursor-pointer">
-            Discover
-          </div>
-          <div className=" absolute top-20 left-0 z-110 text-[#fff]  w-[100%] h-[100%] text-[2rem] hover:text-[#ffffff00] uppercase flex justify-center items-center cursor-pointer">
-            Maldives
-          </div>
-          <img className="listImg4Src absolute top-0 left-0 w-[100%] h-[100%]" src="images/maldives2.jpg" alt="" /></div>
-      </div>
-
-      <div className="imgCon absolute top-0 left-0 w-[100vw] h-[100vh] z-1 overflow-hidden ">
-          <div className="relative w-[100vw] h-[100vh] overflow-hidden">
-            <img className="
-            imgIround absolute top-0 object-none left-0 w-[100vw] h-[100vh] z-2" src="images/scotland1.jpg" alt=""/>
-            <img className="
-            max-lg:w-[100vw]
-            max-lg:h-[100vw]
-            imgArc absolute top-[50%] left-[50%] translate-[-50%] w-[1080px] h-[1080px] object-none rounded-full z-3 brightness-80 " src="images/scotland1.jpg" alt=""/>
-            <img className="
-            max-lg:w-[50vw]
-            max-lg:h-[50vw]
-            imgCenter absolute top-[50%] left-[50%] translate-[-50%] w-[540px] h-[540px] object-none rounded-full z-4" src="images/scotland1.jpg" alt=""/>
-          </div>l
-      </div>
-
-      <div className="addsCon absolute top-0 left-0 w-[100vw] h-[100vh] z-5 overflow-hidden"> 
-        <div className="relative w-[100vw] h-[100vh] flex flex-col justify-center items-center text-[var(--tx1)]">
-          <div className=" overflow-hidden ">
-            <div className="
-            max-lg:tracking-[20px]
-            max-sm:tracking-[10px]
-            max-lg:text-[4rem]
-            max-sm:text-[2rem]
-            mainTx1 text-[5rem] tracking-[60px] mt-[80px]">HIGHLANDS</div>
-          </div>
-          <hr className="
-            max-sm:w-[240px]
-          border-0.5 w-[400px] my-[20px]"/>
-          <div className=" overflow-hidden  mb-[40px]">
-            <div className="
-            max-sm:tracking-[10px]
-            max-sm:[1.2rem]
-            mainTx2 text-[1.4rem] tracking-[20px]">SCOTLAND</div>
-          </div>
-
-          <div className="middleArrows flex gap-[40px]">
-            <img className="leftArrow w-[60px] h-[60px]" src="images/half_arrow_left_white.svg" alt="" />
-            <div className="h-[60px] border-1 border-[var(--tx1)]"></div>
-            <img className="rightArrow w-[60px] h-[60px]" src="images/half_arrow_right_white.svg" alt="" />
-          </div>
-
-          <div className="switcher absolute w-[100vw] h-[120px] px-[40px] flex bottom-10 left-0 items-end justify-between">
-            <div className="
-            max-lg:w-[40px]
-            max-sm:hidden
-            w-[200px] h-[100px]"></div>
-            <div className="
-            max-sm:top-[-100%]
-            max-sm:left-[50%]
-            max-sm:translate-x-[-50%]
-            max-lg:top-[-60%]
-            discoverBtn relative underline uppercase cursor-pointer text-[0.9rem]">
-              <div className="discoverAnime absolute top-[50%] left-[50%] w-[20px] h-[20px] -translate-y-[50%] -translate-x-[50%] rounded-full bg-[var(--tx1)] opacity-70 hidden"></div>
-              Discover this destination</div>
-            <div className="
-            max-lg:w-[40px]
-            max-lg:top-[-60%]
-            max-sm:top-[-40%]
-            w-[200px] relative flex items-center gap-[20px] text-[0.9rem] z-10 ">
-              <div className="uppercase max-lg:hidden">
-                switch
-              </div>
-              <div className="w-[30px] h-[0px]  border-1 border-[var(--tx)] max-lg:hidden"></div>
-              <div className="switchBtn w-[40px] h-[40px] rounded-full bg-white flex justify-center items-center cursor-pointer" >
-                <img src="images/randomize_icon_black.svg" alt="" />
-              </div>
+            <div className="nav fixed top-0 left-0 z-100">
+              <Navbar />
             </div>
-          </div>
-        </div>
 
-      </div>
+            <div className="backBtn
+            max-lg:hidden
+            fixed top-[100px] right-0 z-100 h-[40px] w-[60px] flex justify-center items-center gap-[20px] text-[var(--tx1)] bg-[#00000033] rounded-l-full cursor-pointer hidden">
+              <div className="relative z-100 h-[100px] w-[200px] flex justify-center items-center gap-[20px]">
+              <div className="">
+                <img src="images/x dark.svg" alt="" className="w-[40px] h-[40px]" />
+              </div>
+              <div className="discoverAnime1 absolute top-[50%] left-[50%] w-[20px] h-[20px] -translate-y-[50%] -translate-x-[50%] rounded-full bg-[var(--tx1)] opacity-70 hidden"></div></div>
+            </div>
 
-          <div className="discover absolute top-[100%] left-0 w-[100vw] h-[100vh] z-10  overflow-y-scroll overflow-x-hidden hidden">
-
-            <div className="discoverCon1 relative w-[100vw] h-[auto] z-10">
-              <div className="
-              max-lg:pt-[100px]
-              discoverFirstCon absolute top-0 left-0 w-[100vw] h-[auto] bg-[#ffffffcc] flex flex-col items-center pt-[140px] text-[var(--tx1)]">
-                <div className="
-                max-sm:text-[1.2rem]
-                max-sm:tracking-[8px]
-                max-sm:pl-[0px]
-                max-lg:text-[2rem]
-                max-lg:tracking-[20px]
-                flex flex-col justify-center items-center w-[100vw] h-[40vh] text-[3rem] tracking-[50px] uppercase pl-[50px] ">
-                  <div className="solver"> Breathtaking</div>
-                  <div className=""> Highland views </div>
-                  <div className="
-                  max-sm:ml-[0]
-                  max-lg:h-[60px]
-                  h-[80px] w-[0] border-1 border-[var(--tx1)] ml-[-50px] my-[20px] "></div>
-                </div>
-                <div className="
-                max-lg:flex-col
-                max-lg:h-[auto]
-                flex justify-around items-center w-[80vw] h-[100vh]">
-                  <div className="
-                  max-lg:self-start
-                  max-sm:w-[204px]
-                  max-sm:h-[360px]
-                  max-sm:ml-[20px]
-                  max-sm:mb-[140px]
-                  discoverImgCon1 w-[340px] h-[600px] relative ">
-                    <img src="images/scotland3.jpg" alt="" 
-                    className="
-                    max-sm:w-[204px]
-                    max-sm:h-[360px]
-                    w-[340px] h-[600px]  rounded-[5px]" />
-                    <img src="images/scotland4.jpg" alt="" className="discoverSecondImg
-                    max-sm:w-[122.4px]
-                    max-sm:h-[216px]
-                    max-sm:right-[-61.2px]
-                    absolute bottom-[-100px] right-[-102.5px] w-[205px] h-[360px]  rounded-[5px]" />
-                  </div>
-                  <div className="discoverTextCon1
-                  max-lg:w-[100vw]
-                  max-lg:p-[70px]
-                  max-lg:h-[auto]
-                  max-sm:p-[30px]
-                  w-[50%]  h-[100vh] relative pl-[100px] py-[50px] flex flex-col justify-center gap-[20px] text-[1.2rem]">
-                    <div className="font-bold ">Scottish Highlands</div>
-                    <div className=" leading-8">Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae iusto asperiores voluptatem optio sed non, deleniti provident nobis exercitationem officia, odio quod quibusdam molestiae vel eligendi facilis rerum? Voluptate, velit.
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia minima iusto eos, possimus nemo necessitatibus magni temporibus fugit excepturi nostrum sunt aliquam repudiandae soluta tempore beatae explicabo modi accusamus esse.
+            <div className="share hidden 
+            max-sm:hidden fixed bottom-10 left-10  flex-col items-center w-[100px] h-[100px] justify-between text-[0.9rem] mr-[100px] text-[var(--tx1)] z-110">
+                    <div className="rotate-270 mt-[-40px]">SHARE</div>
+                    <div className=" w-[0] h-[30px] mt-[30px] border-1 border-[var(--tx)]"></div>
+                    <div className=" w-[20px] h-[30px] ">
+                      <img className="shareSvg w-[30px] h-[30px] " src="images/share.svg" alt="" />
                     </div>
-                    <div className="font-bold underline cursor-pointer">Discover and locate on map</div>
-                  </div>
-                </div>
-
-                <div className="
-                max-lg:h-[100px]
-                h-[240px]"></div>
-
-                <div className="
-                max-lg:flex-col
-                max-lg:h-[auto]
-                max-lg:pl-[0]
-                flex justify-around items-center w-[80vw] h-[100vh] pb-[100px] pl-[115px]">
-                  <div className="
-                  max-lg:self-end
-                  max-sm:w-[204px]
-                  max-sm:h-[360px]
-                  max-sm:ml-[20px]
-                  max-sm:mb-[140px]
-                  discoverImgCon1 w-[340px] h-[600px] relative ">
-                    <img src="images/scotland3.jpg" alt="" 
-                    className="
-                    max-sm:w-[204px]
-                    max-sm:h-[360px]
-                    w-[340px] h-[600px]  rounded-[5px]" />
-                    <img src="images/scotland4.jpg" alt="" className="discoverSecondImg
-                    max-sm:w-[122.4px]
-                    max-sm:h-[216px]
-                    max-sm:left-[-61.2px]
-                    absolute bottom-[-100px] left-[-102.5px] w-[205px] h-[360px]  rounded-[5px]" />
-                  </div>
-                  <div className="discoverTextCon1 
-                    max-lg:w-[100vw]
-                    max-lg:p-[70px]
-                    max-lg:pt-[140px]
-                    max-lg:h-[auto]
-                    max-sm:p-[30px]
-                    w-[50%]  h-[100vh] relative pl-[20px] py-[50px] flex flex-col justify-center gap-[20px] text-[1.2rem]">
-                      <div className="font-bold ">One of the best natural views.</div>
-                      <div className=" leading-8">Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae iusto asperiores voluptatem optio sed non, deleniti provident nobis exercitationem officia, odio quod quibusdam molestiae vel eligendi facilis rerum? Voluptate, velit.
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia minima iusto eos, possimus nemo necessitatibus magni temporibus fugit excepturi nostrum sunt aliquam repudiandae soluta tempore beatae explicabo modi accusamus esse.
-                      </div>
-                      <div className="font-bold underline cursor-pointer">Discover and locate on map</div>
-                  </div>
-
-                </div>
-
-              </div>
             </div>
 
-            <div className="discoverCon2 relative w-[100vw] h-[auto] z-10 hidden">
+          <div className="main relative w-[100vw] h-[100vh] overflow-hidden">
+
+            <div className="listAll absolute w-[100vw] h-[100vh] top-0 left-0 z-110 hidden">
               <div className="
-              max-lg:pt-[100px]
-              discoverFirstCon absolute top-0 left-0 w-[100vw] h-[auto] bg-[#ffffffcc] flex flex-col items-center pt-[140px] text-[var(--tx1)]">
-                <div className="
-                max-sm:text-[1.2rem]
-                max-sm:tracking-[8px]
-                max-sm:pl-[0px]
-                max-lg:text-[2rem]
-                max-lg:tracking-[20px]
-                flex flex-col justify-center items-center w-[100vw] h-[40vh] text-[3rem] tracking-[50px] uppercase pl-[50px] ">
-                  <div className="solver">Desert</div>
-                  <div className="">soul calling</div>
-                  <div className="
-                  max-sm:ml-[0]
-                  max-lg:h-[60px]
-                  h-[80px] w-[0] border-1 border-[var(--tx1)] ml-[-50px] my-[20px] "></div>
+              max-xl:w-[100%]
+              max-xl:h-[25%]
+              listImg1 relative w-[25%] h-[100%] ">
+                <div className="listImg1Btn absolute top-0 left-0 z-111 text-[#00000000] bg-[#00000033] w-[100%] h-[100%] text-[2rem] hover:bg-[#000000cc] hover:text-[white]  transition-[0.5s] uppercase flex justify-center items-center cursor-pointer">
+                  Discover
                 </div>
-                <div className="
-                max-lg:flex-col
-                max-lg:h-[auto]
-                flex justify-around items-center w-[80vw] h-[100vh]">
-                  <div className="
-                  max-lg:self-start
-                  max-sm:w-[204px]
-                  max-sm:h-[360px]
-                  max-sm:ml-[20px]
-                  max-sm:mb-[140px]
-                  discoverImgCon1 w-[340px] h-[600px] relative ">
-                    <img src="images/sahara2.jpg" alt="" 
-                    className="
-                    max-sm:w-[204px]
-                    max-sm:h-[360px]
-                    w-[340px] h-[600px]  rounded-[5px]" />
-                    <img src="images/sahara3.jpg" alt="" className="discoverSecondImg
-                    max-sm:w-[122.4px]
-                    max-sm:h-[216px]
-                    max-sm:right-[-61.2px]
-                    absolute bottom-[-100px] right-[-102.5px] w-[205px] h-[360px]  rounded-[5px]" />
-                  </div>
-                  <div className="discoverTextCon1
-                  max-lg:w-[100vw]
-                  max-lg:p-[70px]
-                  max-lg:h-[auto]
-                  max-sm:p-[30px]
-                  w-[50%]  h-[100vh] relative pl-[100px] py-[50px] flex flex-col justify-center gap-[20px] text-[1.2rem]">
-                    <div className="font-bold ">Marrakech Desert</div>
-                    <div className=" leading-8">Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae iusto asperiores voluptatem optio sed non, deleniti provident nobis exercitationem officia, odio quod quibusdam molestiae vel eligendi facilis rerum? Voluptate, velit.
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia minima iusto eos, possimus nemo necessitatibus magni temporibus fugit excepturi nostrum sunt aliquam repudiandae soluta tempore beatae explicabo modi accusamus esse.
-                    </div>
-                    <div className="font-bold underline cursor-pointer">Discover and locate on map</div>
-                  </div>
+                <div className=" absolute top-20 left-0 z-110 text-[#fff]  w-[100%] h-[100%] text-[2rem] hover:text-[#ffffff00] uppercase flex justify-center items-center cursor-pointer">
+                  Highlands
                 </div>
-
-                <div className="
-                max-lg:h-[100px]
-                h-[240px]"></div>
-
-                <div className="
-                max-lg:flex-col
-                max-lg:h-[auto]
-                max-lg:pl-[0]
-                flex justify-around items-center w-[80vw] h-[100vh] pb-[100px] pl-[115px]">
-                  <div className="
-                  max-lg:self-end
-                  max-sm:w-[204px]
-                  max-sm:h-[360px]
-                  max-sm:ml-[20px]
-                  max-sm:mb-[140px]
-                  discoverImgCon1 w-[340px] h-[600px] relative ">
-                    <img src="images/sahara4.jpg" alt="" 
-                    className="
-                    max-sm:w-[204px]
-                    max-sm:h-[360px]
-                    w-[340px] h-[600px]  rounded-[5px]" />
-                    <img src="images/sahara5.jpg" alt="" className="discoverSecondImg
-                    max-sm:w-[122.4px]
-                    max-sm:h-[216px]
-                    max-sm:left-[-61.2px]
-                    absolute bottom-[-100px] left-[-102.5px] w-[205px] h-[360px]  rounded-[5px]" />
-                  </div>
-                  <div className="discoverTextCon2
-                    max-lg:w-[100vw]
-                    max-lg:p-[70px]
-                    max-lg:pt-[140px]
-                    max-lg:h-[auto]
-                    max-sm:p-[30px]
-                    w-[50%]  h-[100vh] relative pl-[20px] py-[50px] flex flex-col justify-center gap-[20px] text-[1.2rem]">
-                      <div className="font-bold ">Sahara sunset vibes.</div>
-                      <div className=" leading-8">Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae iusto asperiores voluptatem optio sed non, deleniti provident nobis exercitationem officia, odio quod quibusdam molestiae vel eligendi facilis rerum? Voluptate, velit.
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia minima iusto eos, possimus nemo necessitatibus magni temporibus fugit excepturi nostrum sunt aliquam repudiandae soluta tempore beatae explicabo modi accusamus esse.
-                      </div>
-                      <div className="font-bold underline cursor-pointer">Discover and locate on map</div>
-                  </div>
-
-                </div>
-
-              </div>
-            </div>
-
-            <div className="discoverCon3 relative w-[100vw] h-[auto] z-10 hidden">
+                <img className="listImg1Src absolute top-0 left-0 w-[100%] h-[100%]" src="images/scotland2.jpg" alt="" /></div>
               <div className="
-              max-lg:pt-[100px]
-              discoverFirstCon absolute top-0 left-0 w-[100vw] h-[auto] bg-[#ffffffcc] flex flex-col items-center pt-[140px] text-[var(--tx1)]">
-                <div className="
-                max-sm:text-[1.2rem]
-                max-sm:tracking-[8px]
-                max-sm:pl-[0px]
-                max-lg:text-[2rem]
-                max-lg:tracking-[20px]
-                flex flex-col justify-center items-center w-[100vw] h-[40vh] text-[3rem] tracking-[50px] uppercase pl-[50px] ">
-                  <div className="solver">Nature</div>
-                  <div className="">beyond words</div>
-                  <div className="
-                  max-sm:ml-[0]
-                  max-lg:h-[60px]
-                  h-[80px] w-[0] border-1 border-[var(--tx1)] ml-[-50px] my-[20px] "></div>
+              max-xl:w-[100%]
+              max-xl:h-[25%]
+              listImg2 relative w-[25%] h-[100%] ">
+                <div className="listImg2Btn absolute top-0 left-0 z-111 text-[#00000000] bg-[#00000033] w-[100%] h-[100%] text-[2rem] hover:bg-[#000000cc] hover:text-[white]  transition-[0.5s] uppercase flex justify-center items-center cursor-pointer">
+                  Discover
                 </div>
-                <div className="
-                max-lg:flex-col
-                max-lg:h-[auto]
-                flex justify-around items-center w-[80vw] h-[100vh]">
-                  <div className="
-                  max-lg:self-start
-                  max-sm:w-[204px]
-                  max-sm:h-[360px]
-                  max-sm:ml-[20px]
-                  max-sm:mb-[140px]
-                  discoverImgCon1 w-[340px] h-[600px] relative ">
-                    <img src="images/dolomites3.jpg" alt="" 
-                    className="
-                    max-sm:w-[204px]
-                    max-sm:h-[360px]
-                    w-[340px] h-[600px]  rounded-[5px]" />
-                    <img src="images/dolomites4.jpg" alt="" className="discoverSecondImg
-                    max-sm:w-[122.4px]
-                    max-sm:h-[216px]
-                    max-sm:right-[-61.2px]
-                    absolute bottom-[-100px] right-[-102.5px] w-[205px] h-[360px]  rounded-[5px]" />
-                  </div>
-                  <div className="discoverTextCon1
-                  max-lg:w-[100vw]
-                  max-lg:p-[70px]
-                  max-lg:h-[auto]
-                  max-sm:p-[30px]
-                  w-[50%]  h-[100vh] relative pl-[100px] py-[50px] flex flex-col justify-center gap-[20px] text-[1.2rem]">
-                    <div className="font-bold ">Dolomites Italy</div>
-                    <div className=" leading-8">Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae iusto asperiores voluptatem optio sed non, deleniti provident nobis exercitationem officia, odio quod quibusdam molestiae vel eligendi facilis rerum? Voluptate, velit.
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia minima iusto eos, possimus nemo necessitatibus magni temporibus fugit excepturi nostrum sunt aliquam repudiandae soluta tempore beatae explicabo modi accusamus esse.
-                    </div>
-                    <div className="font-bold underline cursor-pointer">Discover and locate on map</div>
-                  </div>
+                <div className=" absolute top-20 left-0 z-110 text-[#fff]  w-[100%] h-[100%] text-[2rem] hover:text-[#ffffff00] uppercase flex justify-center items-center cursor-pointer">
+                  Sahara
                 </div>
-
-                <div className="
-                max-lg:h-[100px]
-                h-[240px]"></div>
-
-                <div className="
-                max-lg:flex-col
-                max-lg:h-[auto]
-                max-lg:pl-[0]
-                flex justify-around items-center w-[80vw] h-[100vh] pb-[100px] pl-[115px]">
-                  <div className="
-                  max-lg:self-end
-                  max-sm:w-[204px]
-                  max-sm:h-[360px]
-                  max-sm:ml-[20px]
-                  max-sm:mb-[140px]
-                  discoverImgCon1 w-[340px] h-[600px] relative ">
-                    <img src="images/dolomites2.jpg" alt="" 
-                    className="
-                    max-sm:w-[204px]
-                    max-sm:h-[360px]
-                    w-[340px] h-[600px]  rounded-[5px]" />
-                    <img src="images/dolomites5.jpg" alt="" className="discoverSecondImg
-                    max-sm:w-[122.4px]
-                    max-sm:h-[216px]
-                    max-sm:left-[-61.2px]
-                    absolute bottom-[-100px] left-[-102.5px] w-[205px] h-[360px]  rounded-[5px]" />
-                  </div>
-                  <div className="discoverTextCon2
-                    max-lg:w-[100vw]
-                    max-lg:p-[70px]
-                    max-lg:pt-[140px]
-                    max-lg:h-[auto]
-                    max-sm:p-[30px]
-                    w-[50%]  h-[100vh] relative pl-[20px] py-[50px] flex flex-col justify-center gap-[20px] text-[1.2rem]">
-                      <div className="font-bold ">Dolomites steal hearts.</div>
-                      <div className=" leading-8">Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae iusto asperiores voluptatem optio sed non, deleniti provident nobis exercitationem officia, odio quod quibusdam molestiae vel eligendi facilis rerum? Voluptate, velit.
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia minima iusto eos, possimus nemo necessitatibus magni temporibus fugit excepturi nostrum sunt aliquam repudiandae soluta tempore beatae explicabo modi accusamus esse.
-                      </div>
-                      <div className="font-bold underline cursor-pointer">Discover and locate on map</div>
-                  </div>
-
-                </div>
-
-              </div>
-            </div>
-
-            <div className="discoverCon4 relative w-[100vw] h-[auto] z-10 hidden">
+                <img className="listImg2Src absolute top-0 left-0 w-[100%] h-[100%]" src="images/sahara4.jpg" alt="" /></div>
               <div className="
-              max-lg:pt-[100px]
-              discoverFirstCon absolute top-0 left-0 w-[100vw] h-[auto] bg-[#ffffffcc] flex flex-col items-center pt-[140px] text-[var(--tx1)]">
-                <div className="
-                max-sm:text-[1.2rem]
-                max-sm:tracking-[8px]
-                max-sm:pl-[0px]
-                max-lg:text-[2rem]
-                max-lg:tracking-[20px]
-                flex flex-col justify-center items-center w-[100vw] h-[40vh] text-[3rem] tracking-[50px] uppercase pl-[50px] ">
-                  <div className="solver">Welcome</div>
-                  <div className="">in paradise</div>
-                  <div className="
-                  max-sm:ml-[0]
-                  max-lg:h-[60px]
-                  h-[80px] w-[0] border-1 border-[var(--tx1)] ml-[-50px] my-[20px] "></div>
+              max-xl:w-[100%]
+              max-xl:h-[25%]
+              listImg3 relative w-[25%] h-[100%] ">
+                <div className="listImg3Btn absolute top-0 left-0 z-111 text-[#00000000] bg-[#00000033] w-[100%] h-[100%] text-[2rem] hover:bg-[#000000cc] hover:text-[white]  transition-[0.5s] uppercase flex justify-center items-center cursor-pointer">
+                  Discover
                 </div>
-                <div className="
-                max-lg:flex-col
-                max-lg:h-[auto]
-                flex justify-around items-center w-[80vw] h-[100vh]">
-                  <div className="
-                  max-lg:self-start
-                  max-sm:w-[204px]
-                  max-sm:h-[360px]
-                  max-sm:ml-[20px]
-                  max-sm:mb-[140px]
-                  discoverImgCon1 w-[340px] h-[600px] relative ">
-                    <img src="images/maldives3.jpg" alt="" 
-                    className="
-                    max-sm:w-[204px]
-                    max-sm:h-[360px]
-                    w-[340px] h-[600px]  rounded-[5px]" />
-                    <img src="images/maldives4.jpg" alt="" className="discoverSecondImg
-                    max-sm:w-[122.4px]
-                    max-sm:h-[216px]
-                    max-sm:right-[-61.2px]
-                    absolute bottom-[-100px] right-[-102.5px] w-[205px] h-[360px]  rounded-[5px]" />
-                  </div>
-                  <div className="discoverTextCon1
-                  max-lg:w-[100vw]
-                  max-lg:p-[70px]
-                  max-lg:h-[auto]
-                  max-sm:p-[30px]
-                  w-[50%]  h-[100vh] relative pl-[100px] py-[50px] flex flex-col justify-center gap-[20px] text-[1.2rem]">
-                    <div className="font-bold ">Maldives - Indian Ocean</div>
-                    <div className=" leading-8">Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae iusto asperiores voluptatem optio sed non, deleniti provident nobis exercitationem officia, odio quod quibusdam molestiae vel eligendi facilis rerum? Voluptate, velit.
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia minima iusto eos, possimus nemo necessitatibus magni temporibus fugit excepturi nostrum sunt aliquam repudiandae soluta tempore beatae explicabo modi accusamus esse.
-                    </div>
-                    <div className="font-bold underline cursor-pointer">Discover and locate on map</div>
-                  </div>
+                <div className=" absolute top-20 left-0 z-110 text-[#fff]  w-[100%] h-[100%] text-[2rem] hover:text-[#ffffff00] uppercase flex justify-center items-center cursor-pointer">
+                  Dolomites
                 </div>
-
-                <div className="
-                max-lg:h-[100px]
-                h-[240px]"></div>
-
-                <div className="
-                max-lg:flex-col
-                max-lg:h-[auto]
-                max-lg:pl-[0]
-                flex justify-around items-center w-[80vw] h-[100vh] pb-[100px] pl-[115px]">
-                  <div className="
-                  max-lg:self-end
-                  max-sm:w-[204px]
-                  max-sm:h-[360px]
-                  max-sm:ml-[20px]
-                  max-sm:mb-[140px]
-                  discoverImgCon1 w-[340px] h-[600px] relative ">
-                    <img src="images/maldives2.jpg" alt="" 
-                    className="
-                    max-sm:w-[204px]
-                    max-sm:h-[360px]
-                    w-[340px] h-[600px]  rounded-[5px]" />
-                    <img src="images/maldives5.jpg" alt="" className="discoverSecondImg
-                    max-sm:w-[122.4px]
-                    max-sm:h-[216px]
-                    max-sm:left-[-61.2px]
-                    absolute bottom-[-100px] left-[-102.5px] w-[205px] h-[360px]  rounded-[5px]" />
-                  </div>
-                  <div className="discoverTextCon2
-                    max-lg:w-[100vw]
-                    max-lg:p-[70px]
-                    max-lg:pt-[140px]
-                    max-lg:h-[auto]
-                    max-sm:p-[30px]
-                    w-[50%]  h-[100vh] relative pl-[20px] py-[50px] flex flex-col justify-center gap-[20px] text-[1.2rem]">
-                      <div className="font-bold ">Endless ocean bliss.</div>
-                      <div className=" leading-8">Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae iusto asperiores voluptatem optio sed non, deleniti provident nobis exercitationem officia, odio quod quibusdam molestiae vel eligendi facilis rerum? Voluptate, velit.
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia minima iusto eos, possimus nemo necessitatibus magni temporibus fugit excepturi nostrum sunt aliquam repudiandae soluta tempore beatae explicabo modi accusamus esse.
-                      </div>
-                      <div className="font-bold underline cursor-pointer">Discover and locate on map</div>
-                  </div>
-
+                <img className="listImg3Src absolute top-0 left-0 w-[100%] h-[100%]" src="images/dolomites2.jpg" alt="" /></div>
+              <div className="
+              max-xl:w-[100%]
+              max-xl:h-[25%]
+              listImg4 relative w-[25%] h-[100%] ">
+                <div className="listImg4Btn absolute top-0 left-0 z-111 text-[#00000000] bg-[#00000033] w-[100%] h-[100%] text-[2rem] hover:bg-[#000000cc] hover:text-[white]  transition-[0.5s] uppercase flex justify-center items-center cursor-pointer">
+                  Discover
                 </div>
-
-              </div>
+                <div className=" absolute top-20 left-0 z-110 text-[#fff]  w-[100%] h-[100%] text-[2rem] hover:text-[#ffffff00] uppercase flex justify-center items-center cursor-pointer">
+                  Maldives
+                </div>
+                <img className="listImg4Src absolute top-0 left-0 w-[100%] h-[100%]" src="images/maldives2.jpg" alt="" /></div>
             </div>
 
+            <div className="imgCon absolute top-0 left-0 w-[100vw] h-[100vh] z-1 overflow-hidden ">
+                <div className="relative w-[100vw] h-[100vh] overflow-hidden">
+                  <img className="
+                  imgIround absolute top-0 object-none left-0 w-[100vw] h-[100vh] z-2" src="images/scotland1.jpg" alt=""/>
+                  <img className="
+                  max-lg:w-[100vw]
+                  max-lg:h-[100vw]
+                  imgArc absolute top-[50%] left-[50%] translate-[-50%] w-[1080px] h-[1080px] object-none rounded-full z-3 brightness-80 " src="images/scotland1.jpg" alt=""/>
+                  <img className="
+                  max-lg:w-[50vw]
+                  max-lg:h-[50vw]
+                  imgCenter absolute top-[50%] left-[50%] translate-[-50%] w-[540px] h-[540px] object-none rounded-full z-4" src="images/scotland1.jpg" alt=""/>
+                </div>l
+            </div>
+
+            <div className="addsCon absolute top-0 left-0 w-[100vw] h-[100vh] z-5 overflow-hidden"> 
+              <div className="relative w-[100vw] h-[100vh] flex flex-col justify-center items-center text-[var(--tx1)]">
+                <div className=" overflow-hidden ">
+                  <div className="
+                  max-lg:tracking-[20px]
+                  max-sm:tracking-[10px]
+                  max-lg:text-[4rem]
+                  max-sm:text-[2rem]
+                  mainTx1 text-[5rem] tracking-[60px] mt-[80px]">HIGHLANDS</div>
+                </div>
+                <hr className="
+                  max-sm:w-[240px]
+                border-0.5 w-[400px] my-[20px]"/>
+                <div className=" overflow-hidden  mb-[40px]">
+                  <div className="
+                  max-sm:tracking-[10px]
+                  max-sm:[1.2rem]
+                  mainTx2 text-[1.4rem] tracking-[20px]">SCOTLAND</div>
+                </div>
+
+                <div className="middleArrows flex gap-[40px]">
+                  <img className="leftArrow w-[60px] h-[60px]" src="images/half_arrow_left_white.svg" alt="" />
+                  <div className="h-[60px] border-1 border-[var(--tx1)]"></div>
+                  <img className="rightArrow w-[60px] h-[60px]" src="images/half_arrow_right_white.svg" alt="" />
+                </div>
+
+                <div className="switcher absolute w-[100vw] h-[120px] px-[40px] flex bottom-10 left-0 items-end justify-between">
+                  <div className="
+                  max-lg:w-[40px]
+                  max-sm:hidden
+                  w-[200px] h-[100px]"></div>
+                  <div className="
+                  max-sm:top-[-100%]
+                  max-sm:left-[50%]
+                  max-sm:translate-x-[-50%]
+                  max-lg:top-[-60%]
+                  discoverBtn relative underline uppercase cursor-pointer text-[0.9rem]">
+                    <div className="discoverAnime absolute top-[50%] left-[50%] w-[20px] h-[20px] -translate-y-[50%] -translate-x-[50%] rounded-full bg-[var(--tx1)] opacity-70 hidden"></div>
+                    Discover this destination</div>
+                  <div className="
+                  max-lg:w-[40px]
+                  max-lg:top-[-60%]
+                  max-sm:top-[-40%]
+                  w-[200px] relative flex items-center gap-[20px] text-[0.9rem] z-10 ">
+                    <div className="uppercase max-lg:hidden">
+                      switch
+                    </div>
+                    <div className="w-[30px] h-[0px]  border-1 border-[var(--tx)] max-lg:hidden"></div>
+                    <div className="switchBtn w-[40px] h-[40px] rounded-full bg-white flex justify-center items-center cursor-pointer" >
+                      <img src="images/randomize_icon_black.svg" alt="" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+                <div className="discover absolute top-[100%] left-0 w-[100vw] h-[100vh] z-10  overflow-y-scroll overflow-x-hidden hidden">
+
+                  <div className="discoverCon1 relative w-[100vw] h-[auto] z-10">
+                    <div className="
+                    max-lg:pt-[100px]
+                    discoverFirstCon absolute top-0 left-0 w-[100vw] h-[auto] bg-[#ffffffcc] flex flex-col items-center pt-[140px] text-[var(--tx1)]">
+                      <div className="scrollHere
+                      max-sm:text-[1.2rem]
+                      max-sm:tracking-[8px]
+                      max-sm:pl-[0px]
+                      max-lg:text-[2rem]
+                      max-lg:tracking-[20px]
+                      flex flex-col justify-center items-center w-[100vw] h-[40vh] text-[3rem] tracking-[50px] uppercase pl-[50px] ">
+                        <div className="solver"> Breathtaking</div>
+                        <div className=""> Highland views </div>
+                        <div className="
+                        max-sm:ml-[0]
+                        max-lg:h-[60px]
+                        h-[80px] w-[0] border-1 border-[var(--tx1)] ml-[-50px] my-[20px] "></div>
+                      </div>
+                      <div className="
+                      max-lg:flex-col
+                      max-lg:h-[auto]
+                      flex justify-around items-center w-[80vw] h-[100vh]">
+                        <div className="
+                        max-lg:self-start
+                        max-sm:w-[204px]
+                        max-sm:h-[360px]
+                        max-sm:ml-[20px]
+                        max-sm:mb-[140px]
+                        discoverImgCon1 w-[340px] h-[600px] relative ">
+                          <img src="images/scotland3.jpg" alt="" 
+                          className="
+                          max-sm:w-[204px]
+                          max-sm:h-[360px]
+                          w-[340px] h-[600px]  rounded-[5px]" />
+                          <img src="images/scotland4.jpg" alt="" className="discoverSecondImg
+                          max-sm:w-[122.4px]
+                          max-sm:h-[216px]
+                          max-sm:right-[-61.2px]
+                          absolute bottom-[-100px] right-[-102.5px] w-[205px] h-[360px]  rounded-[5px]" />
+                        </div>
+                        <div className="discoverTextCon1
+                        max-lg:w-[100vw]
+                        max-lg:p-[70px]
+                        max-lg:h-[auto]
+                        max-sm:p-[30px]
+                        w-[50%]  h-[100vh] relative pl-[100px] py-[50px] flex flex-col justify-center gap-[20px] text-[1.2rem]">
+                          <div className="font-bold ">Scottish Highlands</div>
+                          <div className=" leading-8">Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae iusto asperiores voluptatem optio sed non, deleniti provident nobis exercitationem officia, odio quod quibusdam molestiae vel eligendi facilis rerum? Voluptate, velit.
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia minima iusto eos, possimus nemo necessitatibus magni temporibus fugit excepturi nostrum sunt aliquam repudiandae soluta tempore beatae explicabo modi accusamus esse.
+                          </div>
+                          <div className="font-bold underline cursor-pointer">Discover and locate on map</div>
+                        </div>
+                      </div>
+
+                      <div className="
+                      max-lg:h-[100px]
+                      h-[240px]"></div>
+
+                      <div className="
+                      max-lg:flex-col
+                      max-lg:h-[auto]
+                      max-lg:pl-[0]
+                      flex justify-around items-center w-[80vw] h-[100vh] pb-[100px] pl-[115px]">
+                        <div className="
+                        max-lg:self-end
+                        max-sm:w-[204px]
+                        max-sm:h-[360px]
+                        max-sm:ml-[20px]
+                        max-sm:mb-[140px]
+                        discoverImgCon1 w-[340px] h-[600px] relative ">
+                          <img src="images/scotland3.jpg" alt="" 
+                          className="
+                          max-sm:w-[204px]
+                          max-sm:h-[360px]
+                          w-[340px] h-[600px]  rounded-[5px]" />
+                          <img src="images/scotland4.jpg" alt="" className="discoverSecondImg
+                          max-sm:w-[122.4px]
+                          max-sm:h-[216px]
+                          max-sm:left-[-61.2px]
+                          absolute bottom-[-100px] left-[-102.5px] w-[205px] h-[360px]  rounded-[5px]" />
+                        </div>
+                        <div className="discoverTextCon1 
+                          max-lg:w-[100vw]
+                          max-lg:p-[70px]
+                          max-lg:pt-[140px]
+                          max-lg:h-[auto]
+                          max-sm:p-[30px]
+                          w-[50%]  h-[100vh] relative pl-[20px] py-[50px] flex flex-col justify-center gap-[20px] text-[1.2rem]">
+                            <div className="font-bold ">One of the best natural views.</div>
+                            <div className=" leading-8">Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae iusto asperiores voluptatem optio sed non, deleniti provident nobis exercitationem officia, odio quod quibusdam molestiae vel eligendi facilis rerum? Voluptate, velit.
+                              Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia minima iusto eos, possimus nemo necessitatibus magni temporibus fugit excepturi nostrum sunt aliquam repudiandae soluta tempore beatae explicabo modi accusamus esse.
+                            </div>
+                            <div className="font-bold underline cursor-pointer">Discover and locate on map</div>
+                        </div>
+
+                      </div>
+
+                    </div>
+                  </div>
+
+                  <div className="discoverCon2 relative w-[100vw] h-[auto] z-10 hidden">
+                    <div className="
+                    max-lg:pt-[100px]
+                    discoverFirstCon absolute top-0 left-0 w-[100vw] h-[auto] bg-[#ffffffcc] flex flex-col items-center pt-[140px] text-[var(--tx1)]">
+                      <div className="
+                      max-sm:text-[1.2rem]
+                      max-sm:tracking-[8px]
+                      max-sm:pl-[0px]
+                      max-lg:text-[2rem]
+                      max-lg:tracking-[20px]
+                      flex flex-col justify-center items-center w-[100vw] h-[40vh] text-[3rem] tracking-[50px] uppercase pl-[50px] ">
+                        <div className="solver">Desert</div>
+                        <div className="">soul calling</div>
+                        <div className="
+                        max-sm:ml-[0]
+                        max-lg:h-[60px]
+                        h-[80px] w-[0] border-1 border-[var(--tx1)] ml-[-50px] my-[20px] "></div>
+                      </div>
+                      <div className="
+                      max-lg:flex-col
+                      max-lg:h-[auto]
+                      flex justify-around items-center w-[80vw] h-[100vh]">
+                        <div className="
+                        max-lg:self-start
+                        max-sm:w-[204px]
+                        max-sm:h-[360px]
+                        max-sm:ml-[20px]
+                        max-sm:mb-[140px]
+                        discoverImgCon1 w-[340px] h-[600px] relative ">
+                          <img src="images/sahara2.jpg" alt="" 
+                          className="
+                          max-sm:w-[204px]
+                          max-sm:h-[360px]
+                          w-[340px] h-[600px]  rounded-[5px]" />
+                          <img src="images/sahara3.jpg" alt="" className="discoverSecondImg
+                          max-sm:w-[122.4px]
+                          max-sm:h-[216px]
+                          max-sm:right-[-61.2px]
+                          absolute bottom-[-100px] right-[-102.5px] w-[205px] h-[360px]  rounded-[5px]" />
+                        </div>
+                        <div className="discoverTextCon1
+                        max-lg:w-[100vw]
+                        max-lg:p-[70px]
+                        max-lg:h-[auto]
+                        max-sm:p-[30px]
+                        w-[50%]  h-[100vh] relative pl-[100px] py-[50px] flex flex-col justify-center gap-[20px] text-[1.2rem]">
+                          <div className="font-bold ">Marrakech Desert</div>
+                          <div className=" leading-8">Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae iusto asperiores voluptatem optio sed non, deleniti provident nobis exercitationem officia, odio quod quibusdam molestiae vel eligendi facilis rerum? Voluptate, velit.
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia minima iusto eos, possimus nemo necessitatibus magni temporibus fugit excepturi nostrum sunt aliquam repudiandae soluta tempore beatae explicabo modi accusamus esse.
+                          </div>
+                          <div className="font-bold underline cursor-pointer">Discover and locate on map</div>
+                        </div>
+                      </div>
+
+                      <div className="
+                      max-lg:h-[100px]
+                      h-[240px]"></div>
+
+                      <div className="
+                      max-lg:flex-col
+                      max-lg:h-[auto]
+                      max-lg:pl-[0]
+                      flex justify-around items-center w-[80vw] h-[100vh] pb-[100px] pl-[115px]">
+                        <div className="
+                        max-lg:self-end
+                        max-sm:w-[204px]
+                        max-sm:h-[360px]
+                        max-sm:ml-[20px]
+                        max-sm:mb-[140px]
+                        discoverImgCon1 w-[340px] h-[600px] relative ">
+                          <img src="images/sahara4.jpg" alt="" 
+                          className="
+                          max-sm:w-[204px]
+                          max-sm:h-[360px]
+                          w-[340px] h-[600px]  rounded-[5px]" />
+                          <img src="images/sahara5.jpg" alt="" className="discoverSecondImg
+                          max-sm:w-[122.4px]
+                          max-sm:h-[216px]
+                          max-sm:left-[-61.2px]
+                          absolute bottom-[-100px] left-[-102.5px] w-[205px] h-[360px]  rounded-[5px]" />
+                        </div>
+                        <div className="discoverTextCon2
+                          max-lg:w-[100vw]
+                          max-lg:p-[70px]
+                          max-lg:pt-[140px]
+                          max-lg:h-[auto]
+                          max-sm:p-[30px]
+                          w-[50%]  h-[100vh] relative pl-[20px] py-[50px] flex flex-col justify-center gap-[20px] text-[1.2rem]">
+                            <div className="font-bold ">Sahara sunset vibes.</div>
+                            <div className=" leading-8">Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae iusto asperiores voluptatem optio sed non, deleniti provident nobis exercitationem officia, odio quod quibusdam molestiae vel eligendi facilis rerum? Voluptate, velit.
+                              Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia minima iusto eos, possimus nemo necessitatibus magni temporibus fugit excepturi nostrum sunt aliquam repudiandae soluta tempore beatae explicabo modi accusamus esse.
+                            </div>
+                            <div className="font-bold underline cursor-pointer">Discover and locate on map</div>
+                        </div>
+
+                      </div>
+
+                    </div>
+                  </div>
+
+                  <div className="discoverCon3 relative w-[100vw] h-[auto] z-10 hidden">
+                    <div className="
+                    max-lg:pt-[100px]
+                    discoverFirstCon absolute top-0 left-0 w-[100vw] h-[auto] bg-[#ffffffcc] flex flex-col items-center pt-[140px] text-[var(--tx1)]">
+                      <div className="
+                      max-sm:text-[1.2rem]
+                      max-sm:tracking-[8px]
+                      max-sm:pl-[0px]
+                      max-lg:text-[2rem]
+                      max-lg:tracking-[20px]
+                      flex flex-col justify-center items-center w-[100vw] h-[40vh] text-[3rem] tracking-[50px] uppercase pl-[50px] ">
+                        <div className="solver">Nature</div>
+                        <div className="">beyond words</div>
+                        <div className="
+                        max-sm:ml-[0]
+                        max-lg:h-[60px]
+                        h-[80px] w-[0] border-1 border-[var(--tx1)] ml-[-50px] my-[20px] "></div>
+                      </div>
+                      <div className="
+                      max-lg:flex-col
+                      max-lg:h-[auto]
+                      flex justify-around items-center w-[80vw] h-[100vh]">
+                        <div className="
+                        max-lg:self-start
+                        max-sm:w-[204px]
+                        max-sm:h-[360px]
+                        max-sm:ml-[20px]
+                        max-sm:mb-[140px]
+                        discoverImgCon1 w-[340px] h-[600px] relative ">
+                          <img src="images/dolomites3.jpg" alt="" 
+                          className="
+                          max-sm:w-[204px]
+                          max-sm:h-[360px]
+                          w-[340px] h-[600px]  rounded-[5px]" />
+                          <img src="images/dolomites4.jpg" alt="" className="discoverSecondImg
+                          max-sm:w-[122.4px]
+                          max-sm:h-[216px]
+                          max-sm:right-[-61.2px]
+                          absolute bottom-[-100px] right-[-102.5px] w-[205px] h-[360px]  rounded-[5px]" />
+                        </div>
+                        <div className="discoverTextCon1
+                        max-lg:w-[100vw]
+                        max-lg:p-[70px]
+                        max-lg:h-[auto]
+                        max-sm:p-[30px]
+                        w-[50%]  h-[100vh] relative pl-[100px] py-[50px] flex flex-col justify-center gap-[20px] text-[1.2rem]">
+                          <div className="font-bold ">Dolomites Italy</div>
+                          <div className=" leading-8">Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae iusto asperiores voluptatem optio sed non, deleniti provident nobis exercitationem officia, odio quod quibusdam molestiae vel eligendi facilis rerum? Voluptate, velit.
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia minima iusto eos, possimus nemo necessitatibus magni temporibus fugit excepturi nostrum sunt aliquam repudiandae soluta tempore beatae explicabo modi accusamus esse.
+                          </div>
+                          <div className="font-bold underline cursor-pointer">Discover and locate on map</div>
+                        </div>
+                      </div>
+
+                      <div className="
+                      max-lg:h-[100px]
+                      h-[240px]"></div>
+
+                      <div className="
+                      max-lg:flex-col
+                      max-lg:h-[auto]
+                      max-lg:pl-[0]
+                      flex justify-around items-center w-[80vw] h-[100vh] pb-[100px] pl-[115px]">
+                        <div className="
+                        max-lg:self-end
+                        max-sm:w-[204px]
+                        max-sm:h-[360px]
+                        max-sm:ml-[20px]
+                        max-sm:mb-[140px]
+                        discoverImgCon1 w-[340px] h-[600px] relative ">
+                          <img src="images/dolomites2.jpg" alt="" 
+                          className="
+                          max-sm:w-[204px]
+                          max-sm:h-[360px]
+                          w-[340px] h-[600px]  rounded-[5px]" />
+                          <img src="images/dolomites5.jpg" alt="" className="discoverSecondImg
+                          max-sm:w-[122.4px]
+                          max-sm:h-[216px]
+                          max-sm:left-[-61.2px]
+                          absolute bottom-[-100px] left-[-102.5px] w-[205px] h-[360px]  rounded-[5px]" />
+                        </div>
+                        <div className="discoverTextCon2
+                          max-lg:w-[100vw]
+                          max-lg:p-[70px]
+                          max-lg:pt-[140px]
+                          max-lg:h-[auto]
+                          max-sm:p-[30px]
+                          w-[50%]  h-[100vh] relative pl-[20px] py-[50px] flex flex-col justify-center gap-[20px] text-[1.2rem]">
+                            <div className="font-bold ">Dolomites steal hearts.</div>
+                            <div className=" leading-8">Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae iusto asperiores voluptatem optio sed non, deleniti provident nobis exercitationem officia, odio quod quibusdam molestiae vel eligendi facilis rerum? Voluptate, velit.
+                              Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia minima iusto eos, possimus nemo necessitatibus magni temporibus fugit excepturi nostrum sunt aliquam repudiandae soluta tempore beatae explicabo modi accusamus esse.
+                            </div>
+                            <div className="font-bold underline cursor-pointer">Discover and locate on map</div>
+                        </div>
+
+                      </div>
+
+                    </div>
+                  </div>
+
+                  <div className="discoverCon4 relative w-[100vw] h-[auto] z-10 hidden">
+                    <div className="
+                    max-lg:pt-[100px]
+                    discoverFirstCon absolute top-0 left-0 w-[100vw] h-[auto] bg-[#ffffffcc] flex flex-col items-center pt-[140px] text-[var(--tx1)]">
+                      <div className="
+                      max-sm:text-[1.2rem]
+                      max-sm:tracking-[8px]
+                      max-sm:pl-[0px]
+                      max-lg:text-[2rem]
+                      max-lg:tracking-[20px]
+                      flex flex-col justify-center items-center w-[100vw] h-[40vh] text-[3rem] tracking-[50px] uppercase pl-[50px] ">
+                        <div className="solver">Welcome</div>
+                        <div className="">in paradise</div>
+                        <div className="
+                        max-sm:ml-[0]
+                        max-lg:h-[60px]
+                        h-[80px] w-[0] border-1 border-[var(--tx1)] ml-[-50px] my-[20px] "></div>
+                      </div>
+                      <div className="
+                      max-lg:flex-col
+                      max-lg:h-[auto]
+                      flex justify-around items-center w-[80vw] h-[100vh]">
+                        <div className="
+                        max-lg:self-start
+                        max-sm:w-[204px]
+                        max-sm:h-[360px]
+                        max-sm:ml-[20px]
+                        max-sm:mb-[140px]
+                        discoverImgCon1 w-[340px] h-[600px] relative ">
+                          <img src="images/maldives3.jpg" alt="" 
+                          className="
+                          max-sm:w-[204px]
+                          max-sm:h-[360px]
+                          w-[340px] h-[600px]  rounded-[5px]" />
+                          <img src="images/maldives4.jpg" alt="" className="discoverSecondImg
+                          max-sm:w-[122.4px]
+                          max-sm:h-[216px]
+                          max-sm:right-[-61.2px]
+                          absolute bottom-[-100px] right-[-102.5px] w-[205px] h-[360px]  rounded-[5px]" />
+                        </div>
+                        <div className="discoverTextCon1
+                        max-lg:w-[100vw]
+                        max-lg:p-[70px]
+                        max-lg:h-[auto]
+                        max-sm:p-[30px]
+                        w-[50%]  h-[100vh] relative pl-[100px] py-[50px] flex flex-col justify-center gap-[20px] text-[1.2rem]">
+                          <div className="font-bold ">Maldives - Indian Ocean</div>
+                          <div className=" leading-8">Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae iusto asperiores voluptatem optio sed non, deleniti provident nobis exercitationem officia, odio quod quibusdam molestiae vel eligendi facilis rerum? Voluptate, velit.
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia minima iusto eos, possimus nemo necessitatibus magni temporibus fugit excepturi nostrum sunt aliquam repudiandae soluta tempore beatae explicabo modi accusamus esse.
+                          </div>
+                          <div className="font-bold underline cursor-pointer">Discover and locate on map</div>
+                        </div>
+                      </div>
+
+                      <div className="
+                      max-lg:h-[100px]
+                      h-[240px]"></div>
+
+                      <div className="
+                      max-lg:flex-col
+                      max-lg:h-[auto]
+                      max-lg:pl-[0]
+                      flex justify-around items-center w-[80vw] h-[100vh] pb-[100px] pl-[115px]">
+                        <div className="
+                        max-lg:self-end
+                        max-sm:w-[204px]
+                        max-sm:h-[360px]
+                        max-sm:ml-[20px]
+                        max-sm:mb-[140px]
+                        discoverImgCon1 w-[340px] h-[600px] relative ">
+                          <img src="images/maldives2.jpg" alt="" 
+                          className="
+                          max-sm:w-[204px]
+                          max-sm:h-[360px]
+                          w-[340px] h-[600px]  rounded-[5px]" />
+                          <img src="images/maldives5.jpg" alt="" className="discoverSecondImg
+                          max-sm:w-[122.4px]
+                          max-sm:h-[216px]
+                          max-sm:left-[-61.2px]
+                          absolute bottom-[-100px] left-[-102.5px] w-[205px] h-[360px]  rounded-[5px]" />
+                        </div>
+                        <div className="discoverTextCon2
+                          max-lg:w-[100vw]
+                          max-lg:p-[70px]
+                          max-lg:pt-[140px]
+                          max-lg:h-[auto]
+                          max-sm:p-[30px]
+                          w-[50%]  h-[100vh] relative pl-[20px] py-[50px] flex flex-col justify-center gap-[20px] text-[1.2rem]">
+                            <div className="font-bold ">Endless ocean bliss.</div>
+                            <div className=" leading-8">Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae iusto asperiores voluptatem optio sed non, deleniti provident nobis exercitationem officia, odio quod quibusdam molestiae vel eligendi facilis rerum? Voluptate, velit.
+                              Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia minima iusto eos, possimus nemo necessitatibus magni temporibus fugit excepturi nostrum sunt aliquam repudiandae soluta tempore beatae explicabo modi accusamus esse.
+                            </div>
+                            <div className="font-bold underline cursor-pointer">Discover and locate on map</div>
+                        </div>
+
+                      </div>
+
+                    </div>
+                  </div>
+
+                </div>
           </div>
-    </div>
 
-</div>
+      </div>
+  </>
   );
 }
