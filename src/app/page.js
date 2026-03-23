@@ -57,9 +57,7 @@ export default function Home() {
   let mainTllistImg3 = gsap.timeline();
   let mainTllistImg4 = gsap.timeline();
   let mm = gsap.matchMedia();
-
   const root = document.documentElement;
-
 
 function themeChangerDark(){
   root.style.setProperty('--tx1', "black");
@@ -523,7 +521,7 @@ function themeChangerLight(){
 
     mainTlDiscoverBtn
     .to(".discover",{
-      display:"block"
+      display:"block",
     })
     .to(".discoverAnime",{
       width:150,
@@ -553,24 +551,21 @@ function themeChangerLight(){
     .to(".nav",{
       background:"#00000033"
     })
-    .to(".main",{
-      overflowY:"visible",
-      duration:0.5
-    })
     .fromTo(".backBtn",{x:200},{
       x:0,
       display:"flex",
       duration:0.2
-    },"-=0.5");
+    },"-=0.8");
     setTimeout(themeChangerDark,1000);
     }
     discoverBtn.addEventListener("click", discoverBtnClick)
 
     function backBtnClick(){
-      gsap.to(window,{
-      scrollTo:".scrollHere"
+    mainTlBackBtn
+    .to(window,{
+      scrollTo:"#scrollToHere"
     })
-    mainTlBackBtn.to(".discoverAnime1",{
+    .to(".discoverAnime1",{
       width:150,
       height:150,
       display:"block",
@@ -581,13 +576,14 @@ function themeChangerLight(){
       height:20,
       display:"none",
       duration:0.2,
-    }).to(".backBtn",{
+    })
+    .to(".backBtn",{
       x:200,
       display:"none",
       duration:0.2
     })
     .to(".discover",{
-      top:"100%",
+      top:"100vh",
       duration:1
       }
     )
@@ -606,12 +602,8 @@ function themeChangerLight(){
     .to(".nav",{
       background:"#00000000"
     })
-    .to(".main",{
-      overflowY:"hidden",
-      duration:0.5
-    })
 
-    setTimeout(themeChangerLight,500);
+    setTimeout(themeChangerLight,1500);
     }
     backBtn.addEventListener("click", backBtnClick)
 
@@ -680,9 +672,7 @@ function themeChangerLight(){
       .to(".discover",{
         display:"block"
       })
-      .to(".discoverCon1",{
-        display:"block"
-      })
+
       .to(".discoverCon2",{
         display:"none"
       })
@@ -691,7 +681,10 @@ function themeChangerLight(){
       })
       .to(".discoverCon4",{
         display:"none"
-      });
+      })
+      .to(".discoverCon1",{
+        display:"block"
+      })
 
       mm.add("(min-width: 1080px)",()=>{
             mainTllistImg1
@@ -788,11 +781,7 @@ function themeChangerLight(){
     .to(".nav",{
       background:"#00000033"
     })
-    .to(".main",{
-      overflowY:"visible",
-      duration:0.5
-    })
-    .fromTo(".backBtn",{x:-200},{
+    .fromTo(".backBtn",{x:200},{
       x:0,
       display:"flex",
       duration:0.2
@@ -809,14 +798,15 @@ function themeChangerLight(){
       .to(".discoverCon1",{
         display:"none"
       })
-      .to(".discoverCon2",{
-        display:"block"
-      })
+
       .to(".discoverCon3",{
         display:"none"
       })
       .to(".discoverCon4",{
         display:"none"
+      })
+      .to(".discoverCon2",{
+        display:"block"
       });
 
       mm.add("(min-width: 1080px)",()=>{
@@ -914,11 +904,7 @@ function themeChangerLight(){
     .to(".nav",{
       background:"#00000033"
     })
-    .to(".main",{
-      overflowY:"visible",
-      duration:0.5
-    })
-    .fromTo(".backBtn",{x:-200},{
+    .fromTo(".backBtn",{x:200},{
       x:0,
       display:"flex",
       duration:0.2
@@ -938,12 +924,13 @@ function themeChangerLight(){
       .to(".discoverCon2",{
         display:"none"
       })
-      .to(".discoverCon3",{
-        display:"block"
-      })
       .to(".discoverCon4",{
         display:"none"
+      })
+      .to(".discoverCon3",{
+        display:"block"
       });
+
 
     mm.add("(min-width: 1080px)",()=>{
             mainTllistImg3
@@ -1040,11 +1027,7 @@ function themeChangerLight(){
     .to(".nav",{
       background:"#00000033"
     })
-    .to(".main",{
-      overflowY:"visible",
-      duration:0.5
-    })
-    .fromTo(".backBtn",{x:-200},{
+    .fromTo(".backBtn",{x:200},{
       x:0,
       display:"flex",
       duration:0.2
@@ -1152,7 +1135,7 @@ function themeChangerLight(){
     mainTllistImg4
     .to(".discover",{
       top:"0",
-      duration:0.5
+      duration:1
     })
     .to(".listAllBtn",{
       visibility: "hidden"
@@ -1166,11 +1149,7 @@ function themeChangerLight(){
     .to(".nav",{
       background:"#00000033"
     })
-    .to(".main",{
-      overflowY:"visible",
-      duration:0.5
-    })
-    .fromTo(".backBtn",{x:-200},{
+    .fromTo(".backBtn",{x:200},{
       x:0,
       display:"flex",
       duration:0.2
@@ -1193,19 +1172,16 @@ function themeChangerLight(){
   }, []);
 
   return (
-
   <>
     {loading && <Loader />}
       <div className="webSite" style={{ display: loading ? "none" : "block" }}>
 
-            <div className="nav fixed top-0 left-0 z-100">
+            <div className="nav fixed top-0 left-0 z-1000">
               <Navbar />
             </div>
 
-            <div className="backBtn
-            max-lg:hidden
-            fixed top-[100px] right-0 z-100 h-[40px] w-[60px] flex justify-center items-center gap-[20px] text-[var(--tx1)] bg-[#00000033] rounded-l-full cursor-pointer hidden">
-              <div className="relative z-100 h-[100px] w-[200px] flex justify-center items-center gap-[20px]">
+            <div className="backBtn fixed top-[100px] right-0 z-1000 h-[40px] w-[60px] flex justify-center items-center gap-[20px] text-[var(--tx1)] bg-[#00000033] rounded-l-full cursor-pointer hidden">
+              <div className="relative  h-[100px] w-[200px] flex justify-center items-center gap-[20px]">
               <div className="">
                 <img src="images/x dark.svg" alt="" className="w-[40px] h-[40px]" />
               </div>
@@ -1213,7 +1189,7 @@ function themeChangerLight(){
             </div>
 
             <div className="share hidden 
-            max-sm:hidden fixed bottom-10 left-10  flex-col items-center w-[100px] h-[100px] justify-between text-[0.9rem] mr-[100px] text-[var(--tx1)] z-110">
+            max-sm:hidden fixed bottom-10 left-10  flex-col items-center w-[100px] h-[100px] justify-between text-[0.9rem] mr-[100px] text-[var(--tx1)] z-1000">
                     <div className="rotate-270 mt-[-40px]">SHARE</div>
                     <div className=" w-[0] h-[30px] mt-[30px] border-1 border-[var(--tx)]"></div>
                     <div className=" w-[20px] h-[30px] ">
@@ -1221,134 +1197,139 @@ function themeChangerLight(){
                     </div>
             </div>
 
-          <div className="main relative w-[100vw] h-[100vh] overflow-hidden">
+          <div className="main relative w-[100vw] h-[auto] ">
 
-            <div className="listAll absolute w-[100vw] h-[100vh] top-0 left-0 z-110 hidden">
-              <div className="
-              max-xl:w-[100%]
-              max-xl:h-[25%]
-              listImg1 relative w-[25%] h-[100%] ">
-                <div className="listImg1Btn absolute top-0 left-0 z-111 text-[#00000000] bg-[#00000033] w-[100%] h-[100%] text-[2rem] hover:bg-[#000000cc] hover:text-[white]  transition-[0.5s] uppercase flex justify-center items-center cursor-pointer">
-                  Discover
-                </div>
-                <div className=" absolute top-20 left-0 z-110 text-[#fff]  w-[100%] h-[100%] text-[2rem] hover:text-[#ffffff00] uppercase flex justify-center items-center cursor-pointer">
-                  Highlands
-                </div>
-                <img className="listImg1Src absolute top-0 left-0 w-[100%] h-[100%]" src="images/scotland2.jpg" alt="" /></div>
-              <div className="
-              max-xl:w-[100%]
-              max-xl:h-[25%]
-              listImg2 relative w-[25%] h-[100%] ">
-                <div className="listImg2Btn absolute top-0 left-0 z-111 text-[#00000000] bg-[#00000033] w-[100%] h-[100%] text-[2rem] hover:bg-[#000000cc] hover:text-[white]  transition-[0.5s] uppercase flex justify-center items-center cursor-pointer">
-                  Discover
-                </div>
-                <div className=" absolute top-20 left-0 z-110 text-[#fff]  w-[100%] h-[100%] text-[2rem] hover:text-[#ffffff00] uppercase flex justify-center items-center cursor-pointer">
-                  Sahara
-                </div>
-                <img className="listImg2Src absolute top-0 left-0 w-[100%] h-[100%]" src="images/sahara4.jpg" alt="" /></div>
-              <div className="
-              max-xl:w-[100%]
-              max-xl:h-[25%]
-              listImg3 relative w-[25%] h-[100%] ">
-                <div className="listImg3Btn absolute top-0 left-0 z-111 text-[#00000000] bg-[#00000033] w-[100%] h-[100%] text-[2rem] hover:bg-[#000000cc] hover:text-[white]  transition-[0.5s] uppercase flex justify-center items-center cursor-pointer">
-                  Discover
-                </div>
-                <div className=" absolute top-20 left-0 z-110 text-[#fff]  w-[100%] h-[100%] text-[2rem] hover:text-[#ffffff00] uppercase flex justify-center items-center cursor-pointer">
-                  Dolomites
-                </div>
-                <img className="listImg3Src absolute top-0 left-0 w-[100%] h-[100%]" src="images/dolomites2.jpg" alt="" /></div>
-              <div className="
-              max-xl:w-[100%]
-              max-xl:h-[25%]
-              listImg4 relative w-[25%] h-[100%] ">
-                <div className="listImg4Btn absolute top-0 left-0 z-111 text-[#00000000] bg-[#00000033] w-[100%] h-[100%] text-[2rem] hover:bg-[#000000cc] hover:text-[white]  transition-[0.5s] uppercase flex justify-center items-center cursor-pointer">
-                  Discover
-                </div>
-                <div className=" absolute top-20 left-0 z-110 text-[#fff]  w-[100%] h-[100%] text-[2rem] hover:text-[#ffffff00] uppercase flex justify-center items-center cursor-pointer">
-                  Maldives
-                </div>
-                <img className="listImg4Src absolute top-0 left-0 w-[100%] h-[100%]" src="images/maldives2.jpg" alt="" /></div>
-            </div>
-
-            <div className="imgCon absolute top-0 left-0 w-[100vw] h-[100vh] z-1 overflow-hidden ">
-                <div className="relative w-[100vw] h-[100vh] overflow-hidden">
-                  <img className="
-                  imgIround absolute top-0 object-none left-0 w-[100vw] h-[100vh] z-2" src="images/scotland1.jpg" alt=""/>
-                  <img className="
-                  max-lg:w-[100vw]
-                  max-lg:h-[100vw]
-                  imgArc absolute top-[50%] left-[50%] translate-[-50%] w-[1080px] h-[1080px] object-none rounded-full z-3 brightness-80 " src="images/scotland1.jpg" alt=""/>
-                  <img className="
-                  max-lg:w-[50vw]
-                  max-lg:h-[50vw]
-                  imgCenter absolute top-[50%] left-[50%] translate-[-50%] w-[540px] h-[540px] object-none rounded-full z-4" src="images/scotland1.jpg" alt=""/>
-                </div>l
-            </div>
-
-            <div className="addsCon absolute top-0 left-0 w-[100vw] h-[100vh] z-5 overflow-hidden"> 
-              <div className="relative w-[100vw] h-[100vh] flex flex-col justify-center items-center text-[var(--tx1)]">
-                <div className=" overflow-hidden ">
-                  <div className="
-                  max-lg:tracking-[20px]
-                  max-sm:tracking-[10px]
-                  max-lg:text-[4rem]
-                  max-sm:text-[2rem]
-                  mainTx1 text-[5rem] tracking-[60px] mt-[80px]">HIGHLANDS</div>
-                </div>
-                <hr className="
-                  max-sm:w-[240px]
-                border-0.5 w-[400px] my-[20px]"/>
-                <div className=" overflow-hidden  mb-[40px]">
-                  <div className="
-                  max-sm:tracking-[10px]
-                  max-sm:[1.2rem]
-                  mainTx2 text-[1.4rem] tracking-[20px]">SCOTLAND</div>
-                </div>
-
-                <div className="middleArrows flex gap-[40px]">
-                  <img className="leftArrow w-[60px] h-[60px]" src="images/half_arrow_left_white.svg" alt="" />
-                  <div className="h-[60px] border-1 border-[var(--tx1)]"></div>
-                  <img className="rightArrow w-[60px] h-[60px]" src="images/half_arrow_right_white.svg" alt="" />
-                </div>
-
-                <div className="switcher absolute w-[100vw] h-[120px] px-[40px] flex bottom-10 left-0 items-end justify-between">
-                  <div className="
-                  max-lg:w-[40px]
-                  max-sm:hidden
-                  w-[200px] h-[100px]"></div>
-                  <div className="
-                  max-sm:top-[-100%]
-                  max-sm:left-[50%]
-                  max-sm:translate-x-[-50%]
-                  max-lg:top-[-60%]
-                  discoverBtn relative underline uppercase cursor-pointer text-[0.9rem]">
-                    <div className="discoverAnime absolute top-[50%] left-[50%] w-[20px] h-[20px] -translate-y-[50%] -translate-x-[50%] rounded-full bg-[var(--tx1)] opacity-70 hidden"></div>
-                    Discover this destination</div>
-                  <div className="
-                  max-lg:w-[40px]
-                  max-lg:top-[-60%]
-                  max-sm:top-[-40%]
-                  w-[200px] relative flex items-center gap-[20px] text-[0.9rem] z-10 ">
-                    <div className="uppercase max-lg:hidden">
-                      switch
+        <div className="fixed top-0 left-0  w-[100vw] h-[100vh] z-99">
+          <div className="relative">
+                    <div className="listAll absolute w-[100vw] h-[100vh] top-0 left-0 z-100 hidden">
+                      <div className="
+                      max-xl:w-[100%]
+                      max-xl:h-[25%]
+                      listImg1 relative w-[25%] h-[100%] ">
+                        <div className="listImg1Btn absolute top-0 left-0 z-111 text-[#00000000] bg-[#00000033] w-[100%] h-[100%] text-[2rem] hover:bg-[#000000cc] hover:text-[white]  transition-[0.5s] uppercase flex justify-center items-center cursor-pointer">
+                          Discover
+                        </div>
+                        <div className=" absolute top-20 left-0 z-110 text-[#fff]  w-[100%] h-[100%] text-[2rem] hover:text-[#ffffff00] uppercase flex justify-center items-center cursor-pointer">
+                          Highlands
+                        </div>
+                        <img className="listImg1Src absolute top-0 left-0 w-[100%] h-[100%]" src="images/scotland2.jpg" alt="" /></div>
+                      <div className="
+                      max-xl:w-[100%]
+                      max-xl:h-[25%]
+                      listImg2 relative w-[25%] h-[100%] ">
+                        <div className="listImg2Btn absolute top-0 left-0 z-111 text-[#00000000] bg-[#00000033] w-[100%] h-[100%] text-[2rem] hover:bg-[#000000cc] hover:text-[white]  transition-[0.5s] uppercase flex justify-center items-center cursor-pointer">
+                          Discover
+                        </div>
+                        <div className=" absolute top-20 left-0 z-110 text-[#fff]  w-[100%] h-[100%] text-[2rem] hover:text-[#ffffff00] uppercase flex justify-center items-center cursor-pointer">
+                          Sahara
+                        </div>
+                        <img className="listImg2Src absolute top-0 left-0 w-[100%] h-[100%]" src="images/sahara4.jpg" alt="" /></div>
+                      <div className="
+                      max-xl:w-[100%]
+                      max-xl:h-[25%]
+                      listImg3 relative w-[25%] h-[100%] ">
+                        <div className="listImg3Btn absolute top-0 left-0 z-111 text-[#00000000] bg-[#00000033] w-[100%] h-[100%] text-[2rem] hover:bg-[#000000cc] hover:text-[white]  transition-[0.5s] uppercase flex justify-center items-center cursor-pointer">
+                          Discover
+                        </div>
+                        <div className=" absolute top-20 left-0 z-110 text-[#fff]  w-[100%] h-[100%] text-[2rem] hover:text-[#ffffff00] uppercase flex justify-center items-center cursor-pointer">
+                          Dolomites
+                        </div>
+                        <img className="listImg3Src absolute top-0 left-0 w-[100%] h-[100%]" src="images/dolomites2.jpg" alt="" /></div>
+                      <div className="
+                      max-xl:w-[100%]
+                      max-xl:h-[25%]
+                      listImg4 relative w-[25%] h-[100%] ">
+                        <div className="listImg4Btn absolute top-0 left-0 z-111 text-[#00000000] bg-[#00000033] w-[100%] h-[100%] text-[2rem] hover:bg-[#000000cc] hover:text-[white]  transition-[0.5s] uppercase flex justify-center items-center cursor-pointer">
+                          Discover
+                        </div>
+                        <div className=" absolute top-20 left-0 z-110 text-[#fff]  w-[100%] h-[100%] text-[2rem] hover:text-[#ffffff00] uppercase flex justify-center items-center cursor-pointer">
+                          Maldives
+                        </div>
+                        <img className="listImg4Src absolute top-0 left-0 w-[100%] h-[100%]" src="images/maldives2.jpg" alt="" /></div>
                     </div>
-                    <div className="w-[30px] h-[0px]  border-1 border-[var(--tx)] max-lg:hidden"></div>
-                    <div className="switchBtn w-[40px] h-[40px] rounded-full bg-white flex justify-center items-center cursor-pointer" >
-                      <img src="images/randomize_icon_black.svg" alt="" />
+
+                    <div className="imgCon absolute top-0 left-0 w-[100vw] h-[100vh] z-10 overflow-hidden ">
+                        <div className="relative w-[100vw] h-[100vh] overflow-hidden">
+                          <img className="
+                          imgIround absolute top-0 object-none left-0 w-[100vw] h-[100vh] z-11" src="images/scotland1.jpg" alt=""/>
+                          <img className="
+                          max-lg:w-[100vw]
+                          max-lg:h-[100vw]
+                          imgArc absolute top-[50%] left-[50%] translate-[-50%] w-[1080px] h-[1080px] object-none rounded-full z-12 brightness-80 " src="images/scotland1.jpg" alt=""/>
+                          <img className="
+                          max-lg:w-[50vw]
+                          max-lg:h-[50vw]
+                          imgCenter absolute top-[50%] left-[50%] translate-[-50%] w-[540px] h-[540px] object-none rounded-full z-13" src="images/scotland1.jpg" alt=""/>
+                        </div>l
                     </div>
-                  </div>
-                </div>
-              </div>
 
-            </div>
+                    <div className="addsCon absolute top-0 left-0 w-[100vw] h-[100vh] z-99 overflow-hidden"> 
+                      <div className="relative w-[100vw] h-[100vh] flex flex-col justify-center items-center text-[var(--tx1)]">
+                        <div className=" overflow-hidden ">
+                          <div className="
+                          max-lg:tracking-[20px]
+                          max-sm:tracking-[10px]
+                          max-lg:text-[4rem]
+                          max-sm:text-[2rem]
+                          mainTx1 text-[5rem] tracking-[60px] mt-[80px]">HIGHLANDS</div>
+                        </div>
+                        <hr className="
+                          max-sm:w-[240px]
+                        border-0.5 w-[400px] my-[20px]"/>
+                        <div className=" overflow-hidden  mb-[40px]">
+                          <div className="
+                          max-sm:tracking-[10px]
+                          max-sm:[1.2rem]
+                          mainTx2 text-[1.4rem] tracking-[20px]">SCOTLAND</div>
+                        </div>
 
-                <div className="discover absolute top-[100%] left-0 w-[100vw] h-[100vh] z-10  overflow-y-scroll overflow-x-hidden hidden">
+                        <div className="middleArrows flex gap-[40px]">
+                          <img className="leftArrow w-[60px] h-[60px]" src="images/half_arrow_left_white.svg" alt="" />
+                          <div className="h-[60px] border-1 border-[var(--tx1)]"></div>
+                          <img className="rightArrow w-[60px] h-[60px]" src="images/half_arrow_right_white.svg" alt="" />
+                        </div>
 
-                  <div className="discoverCon1 relative w-[100vw] h-[auto] z-10">
-                    <div className="
+                        <div className="switcher absolute w-[100vw] h-[120px] px-[40px] flex bottom-10 left-0 items-end justify-between">
+                          <div className="
+                          max-lg:w-[40px]
+                          max-sm:hidden
+                          w-[200px] h-[100px]"></div>
+                          <div className="
+                          max-sm:top-[-100%]
+                          max-sm:left-[50%]
+                          max-sm:translate-x-[-50%]
+                          max-lg:top-[-60%]
+                          discoverBtn relative underline uppercase cursor-pointer text-[0.9rem]">
+                            <div className="discoverAnime absolute top-[50%] left-[50%] w-[20px] h-[20px] -translate-y-[50%] -translate-x-[50%] rounded-full bg-[var(--tx1)] opacity-70 hidden"></div>
+                            Discover this destination</div>
+                          <div className="
+                          max-lg:w-[40px]
+                          max-lg:top-[-60%]
+                          max-sm:top-[-40%]
+                          w-[200px] relative flex items-center gap-[20px] text-[0.9rem] z-99 ">
+                            <div className="uppercase max-lg:hidden">
+                              switch
+                            </div>
+                            <div className="w-[30px] h-[0px]  border-1 border-[var(--tx)] max-lg:hidden"></div>
+                            <div className="switchBtn w-[40px] h-[40px] rounded-full bg-white flex justify-center items-center cursor-pointer" >
+                              <img src="images/randomize_icon_black.svg" alt="" />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+        </div>
+        </div>
+
+                <div className="discover absolute top-[100vh] left-[0] w-[100vw] h-[auto] z-100 hidden">
+                  <div id="scrollToHere"></div>
+
+                  <div className="discoverCon1 relative w-[100vw] h-[auto] z-99 ">
+                    <div className="anchor1
                     max-lg:pt-[100px]
-                    discoverFirstCon absolute top-0 left-0 w-[100vw] h-[auto] bg-[#ffffffcc] flex flex-col items-center pt-[140px] text-[var(--tx1)]">
-                      <div className="scrollHere
+                    absolute top-0 left-0 w-[100vw] h-[auto] bg-[#ffffffcc] flex flex-col items-center pt-[140px] text-[var(--tx1)] ">
+                      <div className="
                       max-sm:text-[1.2rem]
                       max-sm:tracking-[8px]
                       max-sm:pl-[0px]
@@ -1378,13 +1359,13 @@ function themeChangerLight(){
                           max-sm:w-[204px]
                           max-sm:h-[360px]
                           w-[340px] h-[600px]  rounded-[5px]" />
-                          <img src="images/scotland4.jpg" alt="" className="discoverSecondImg
+                          <img src="images/scotland4.jpg" alt="" className="discoverImgUp1
                           max-sm:w-[122.4px]
                           max-sm:h-[216px]
                           max-sm:right-[-61.2px]
                           absolute bottom-[-100px] right-[-102.5px] w-[205px] h-[360px]  rounded-[5px]" />
                         </div>
-                        <div className="discoverTextCon1
+                        <div className="
                         max-lg:w-[100vw]
                         max-lg:p-[70px]
                         max-lg:h-[auto]
@@ -1394,7 +1375,9 @@ function themeChangerLight(){
                           <div className=" leading-8">Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae iusto asperiores voluptatem optio sed non, deleniti provident nobis exercitationem officia, odio quod quibusdam molestiae vel eligendi facilis rerum? Voluptate, velit.
                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia minima iusto eos, possimus nemo necessitatibus magni temporibus fugit excepturi nostrum sunt aliquam repudiandae soluta tempore beatae explicabo modi accusamus esse.
                           </div>
-                          <div className="font-bold underline cursor-pointer">Discover and locate on map</div>
+                          <div className="font-bold underline cursor-pointer">
+                            <a href="https://www.google.com/maps/search/Scottish+Highlands+tours/@57.5145112,-7.5452279,7z/data=!3m1!4b1?entry=ttu&g_ep=EgoyMDI2MDMxOC4xIKXMDSoASAFQAw%3D%3D">
+                            Discover and locate on map</a></div>
                         </div>
                       </div>
 
@@ -1414,18 +1397,18 @@ function themeChangerLight(){
                         max-sm:ml-[20px]
                         max-sm:mb-[140px]
                         discoverImgCon1 w-[340px] h-[600px] relative ">
-                          <img src="images/scotland3.jpg" alt="" 
+                          <img src="images/scotland2.jpg" alt="" 
                           className="
                           max-sm:w-[204px]
                           max-sm:h-[360px]
                           w-[340px] h-[600px]  rounded-[5px]" />
-                          <img src="images/scotland4.jpg" alt="" className="discoverSecondImg
+                          <img src="images/scotland5.jpg" alt="" className="discoverSecondImg
                           max-sm:w-[122.4px]
                           max-sm:h-[216px]
                           max-sm:left-[-61.2px]
                           absolute bottom-[-100px] left-[-102.5px] w-[205px] h-[360px]  rounded-[5px]" />
                         </div>
-                        <div className="discoverTextCon1 
+                        <div className=" 
                           max-lg:w-[100vw]
                           max-lg:p-[70px]
                           max-lg:pt-[140px]
@@ -1436,7 +1419,9 @@ function themeChangerLight(){
                             <div className=" leading-8">Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae iusto asperiores voluptatem optio sed non, deleniti provident nobis exercitationem officia, odio quod quibusdam molestiae vel eligendi facilis rerum? Voluptate, velit.
                               Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia minima iusto eos, possimus nemo necessitatibus magni temporibus fugit excepturi nostrum sunt aliquam repudiandae soluta tempore beatae explicabo modi accusamus esse.
                             </div>
-                            <div className="font-bold underline cursor-pointer">Discover and locate on map</div>
+                            <div className="font-bold underline cursor-pointer">
+                            <a href="https://www.google.com/maps/search/Scottish+Highlands+tours/@57.5145112,-7.5452279,7z/data=!3m1!4b1?entry=ttu&g_ep=EgoyMDI2MDMxOC4xIKXMDSoASAFQAw%3D%3D">
+                              Discover and locate on map</a></div>
                         </div>
 
                       </div>
@@ -1444,7 +1429,7 @@ function themeChangerLight(){
                     </div>
                   </div>
 
-                  <div className="discoverCon2 relative w-[100vw] h-[auto] z-10 hidden">
+                  <div className="discoverCon2 relative w-[100vw] h-[auto] z-99 hidden">
                     <div className="
                     max-lg:pt-[100px]
                     discoverFirstCon absolute top-0 left-0 w-[100vw] h-[auto] bg-[#ffffffcc] flex flex-col items-center pt-[140px] text-[var(--tx1)]">
@@ -1484,7 +1469,7 @@ function themeChangerLight(){
                           max-sm:right-[-61.2px]
                           absolute bottom-[-100px] right-[-102.5px] w-[205px] h-[360px]  rounded-[5px]" />
                         </div>
-                        <div className="discoverTextCon1
+                        <div className="
                         max-lg:w-[100vw]
                         max-lg:p-[70px]
                         max-lg:h-[auto]
@@ -1494,7 +1479,9 @@ function themeChangerLight(){
                           <div className=" leading-8">Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae iusto asperiores voluptatem optio sed non, deleniti provident nobis exercitationem officia, odio quod quibusdam molestiae vel eligendi facilis rerum? Voluptate, velit.
                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia minima iusto eos, possimus nemo necessitatibus magni temporibus fugit excepturi nostrum sunt aliquam repudiandae soluta tempore beatae explicabo modi accusamus esse.
                           </div>
-                          <div className="font-bold underline cursor-pointer">Discover and locate on map</div>
+                          <div className="font-bold underline cursor-pointer">
+                            <a href="https://www.google.com/maps/search/marrakech+desert+tours/@31.5767828,-8.2026112,11z/data=!3m1!4b1?entry=ttu&g_ep=EgoyMDI2MDMxOC4xIKXMDSoASAFQAw%3D%3D">
+                            Discover and locate on map</a></div>
                         </div>
                       </div>
 
@@ -1525,7 +1512,7 @@ function themeChangerLight(){
                           max-sm:left-[-61.2px]
                           absolute bottom-[-100px] left-[-102.5px] w-[205px] h-[360px]  rounded-[5px]" />
                         </div>
-                        <div className="discoverTextCon2
+                        <div className="
                           max-lg:w-[100vw]
                           max-lg:p-[70px]
                           max-lg:pt-[140px]
@@ -1536,7 +1523,9 @@ function themeChangerLight(){
                             <div className=" leading-8">Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae iusto asperiores voluptatem optio sed non, deleniti provident nobis exercitationem officia, odio quod quibusdam molestiae vel eligendi facilis rerum? Voluptate, velit.
                               Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia minima iusto eos, possimus nemo necessitatibus magni temporibus fugit excepturi nostrum sunt aliquam repudiandae soluta tempore beatae explicabo modi accusamus esse.
                             </div>
-                            <div className="font-bold underline cursor-pointer">Discover and locate on map</div>
+                            <div className="font-bold underline cursor-pointer">
+                              <a href="https://www.google.com/maps/search/marrakech+desert+tours/@31.5767828,-8.2026112,11z/data=!3m1!4b1?entry=ttu&g_ep=EgoyMDI2MDMxOC4xIKXMDSoASAFQAw%3D%3D">
+                              Discover and locate on map</a></div>
                         </div>
 
                       </div>
@@ -1544,7 +1533,7 @@ function themeChangerLight(){
                     </div>
                   </div>
 
-                  <div className="discoverCon3 relative w-[100vw] h-[auto] z-10 hidden">
+                  <div className="discoverCon3 relative w-[100vw] h-[auto] z-99 hidden">
                     <div className="
                     max-lg:pt-[100px]
                     discoverFirstCon absolute top-0 left-0 w-[100vw] h-[auto] bg-[#ffffffcc] flex flex-col items-center pt-[140px] text-[var(--tx1)]">
@@ -1584,7 +1573,7 @@ function themeChangerLight(){
                           max-sm:right-[-61.2px]
                           absolute bottom-[-100px] right-[-102.5px] w-[205px] h-[360px]  rounded-[5px]" />
                         </div>
-                        <div className="discoverTextCon1
+                        <div className="
                         max-lg:w-[100vw]
                         max-lg:p-[70px]
                         max-lg:h-[auto]
@@ -1594,7 +1583,9 @@ function themeChangerLight(){
                           <div className=" leading-8">Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae iusto asperiores voluptatem optio sed non, deleniti provident nobis exercitationem officia, odio quod quibusdam molestiae vel eligendi facilis rerum? Voluptate, velit.
                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia minima iusto eos, possimus nemo necessitatibus magni temporibus fugit excepturi nostrum sunt aliquam repudiandae soluta tempore beatae explicabo modi accusamus esse.
                           </div>
-                          <div className="font-bold underline cursor-pointer">Discover and locate on map</div>
+                          <div className="font-bold underline cursor-pointer">
+                            <a href="https://www.google.com/maps/place/Dolomite+Mountains+Tour+Operator/@46.5720897,11.929626,15.96z/data=!3m1!5s0x4778394aec5d0f61:0x79088afe48faebb7!4m6!3m5!1s0x4778394abf85870b:0x387dbe11ce645437!8m2!3d46.5717384!4d11.9318148!16s%2Fg%2F11cs1sqzvj?entry=ttu&g_ep=EgoyMDI2MDMxOC4xIKXMDSoASAFQAw%3D%3D">
+                            Discover and locate on map</a></div>
                         </div>
                       </div>
 
@@ -1625,7 +1616,7 @@ function themeChangerLight(){
                           max-sm:left-[-61.2px]
                           absolute bottom-[-100px] left-[-102.5px] w-[205px] h-[360px]  rounded-[5px]" />
                         </div>
-                        <div className="discoverTextCon2
+                        <div className="
                           max-lg:w-[100vw]
                           max-lg:p-[70px]
                           max-lg:pt-[140px]
@@ -1636,7 +1627,9 @@ function themeChangerLight(){
                             <div className=" leading-8">Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae iusto asperiores voluptatem optio sed non, deleniti provident nobis exercitationem officia, odio quod quibusdam molestiae vel eligendi facilis rerum? Voluptate, velit.
                               Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia minima iusto eos, possimus nemo necessitatibus magni temporibus fugit excepturi nostrum sunt aliquam repudiandae soluta tempore beatae explicabo modi accusamus esse.
                             </div>
-                            <div className="font-bold underline cursor-pointer">Discover and locate on map</div>
+                            <div className="font-bold underline cursor-pointer">
+                            <a href="https://www.google.com/maps/place/Dolomite+Mountains+Tour+Operator/@46.5720897,11.929626,15.96z/data=!3m1!5s0x4778394aec5d0f61:0x79088afe48faebb7!4m6!3m5!1s0x4778394abf85870b:0x387dbe11ce645437!8m2!3d46.5717384!4d11.9318148!16s%2Fg%2F11cs1sqzvj?entry=ttu&g_ep=EgoyMDI2MDMxOC4xIKXMDSoASAFQAw%3D%3D">
+                              Discover and locate on map</a></div>
                         </div>
 
                       </div>
@@ -1644,7 +1637,7 @@ function themeChangerLight(){
                     </div>
                   </div>
 
-                  <div className="discoverCon4 relative w-[100vw] h-[auto] z-10 hidden">
+                  <div className="discoverCon4 relative w-[100vw] h-[auto] z-99 hidden">
                     <div className="
                     max-lg:pt-[100px]
                     discoverFirstCon absolute top-0 left-0 w-[100vw] h-[auto] bg-[#ffffffcc] flex flex-col items-center pt-[140px] text-[var(--tx1)]">
@@ -1684,7 +1677,7 @@ function themeChangerLight(){
                           max-sm:right-[-61.2px]
                           absolute bottom-[-100px] right-[-102.5px] w-[205px] h-[360px]  rounded-[5px]" />
                         </div>
-                        <div className="discoverTextCon1
+                        <div className="
                         max-lg:w-[100vw]
                         max-lg:p-[70px]
                         max-lg:h-[auto]
@@ -1694,7 +1687,9 @@ function themeChangerLight(){
                           <div className=" leading-8">Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae iusto asperiores voluptatem optio sed non, deleniti provident nobis exercitationem officia, odio quod quibusdam molestiae vel eligendi facilis rerum? Voluptate, velit.
                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia minima iusto eos, possimus nemo necessitatibus magni temporibus fugit excepturi nostrum sunt aliquam repudiandae soluta tempore beatae explicabo modi accusamus esse.
                           </div>
-                          <div className="font-bold underline cursor-pointer">Discover and locate on map</div>
+                          <div className="font-bold underline cursor-pointer">
+                            <a href="https://www.google.com/maps/search/Maldives+-+Indian+Ocean+Tours/@4.8496945,72.5931427,9z/data=!3m1!4b1?entry=ttu&g_ep=EgoyMDI2MDMxOC4xIKXMDSoASAFQAw%3D%3D">
+                            Discover and locate on map</a></div>
                         </div>
                       </div>
 
@@ -1725,7 +1720,7 @@ function themeChangerLight(){
                           max-sm:left-[-61.2px]
                           absolute bottom-[-100px] left-[-102.5px] w-[205px] h-[360px]  rounded-[5px]" />
                         </div>
-                        <div className="discoverTextCon2
+                        <div className="
                           max-lg:w-[100vw]
                           max-lg:p-[70px]
                           max-lg:pt-[140px]
@@ -1736,7 +1731,9 @@ function themeChangerLight(){
                             <div className=" leading-8">Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae iusto asperiores voluptatem optio sed non, deleniti provident nobis exercitationem officia, odio quod quibusdam molestiae vel eligendi facilis rerum? Voluptate, velit.
                               Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia minima iusto eos, possimus nemo necessitatibus magni temporibus fugit excepturi nostrum sunt aliquam repudiandae soluta tempore beatae explicabo modi accusamus esse.
                             </div>
-                            <div className="font-bold underline cursor-pointer">Discover and locate on map</div>
+                            <div className="font-bold underline cursor-pointer">
+                              <a href="https://www.google.com/maps/search/Maldives+-+Indian+Ocean+Tours/@4.8496945,72.5931427,9z/data=!3m1!4b1?entry=ttu&g_ep=EgoyMDI2MDMxOC4xIKXMDSoASAFQAw%3D%3D">
+                              Discover and locate on map</a></div>
                         </div>
 
                       </div>
