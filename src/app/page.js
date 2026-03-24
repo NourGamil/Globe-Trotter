@@ -608,6 +608,9 @@ function themeChangerLight(){
     backBtn.addEventListener("click", backBtnClick)
 
     function listAllBtnClick(){
+        gsap.to(".theZTop",{
+          zIndex:1001
+        })
       mm.add("(max-width:1280px)",()=>{
       gsap.set(".listImg1Src",{attr:{
         src:"images/scotland1.jpg"
@@ -668,6 +671,9 @@ function themeChangerLight(){
     listAllBtn.addEventListener("click", listAllBtnClick)
 
     function listImg1BtnClick(){
+      gsap.to(".theZTop",{
+          zIndex:99
+      });
       discoverChanger
       .to(".discover",{
         display:"block"
@@ -791,6 +797,9 @@ function themeChangerLight(){
     listImg1Btn.addEventListener("click", listImg1BtnClick)
 
     function listImg2BtnClick(){
+      gsap.to(".theZTop",{
+        zIndex:99
+      });
       discoverChanger
       .to(".discover",{
         display:"block"
@@ -914,6 +923,9 @@ function themeChangerLight(){
     listImg2Btn.addEventListener("click", listImg2BtnClick)
 
     function listImg3BtnClick(){
+      gsap.to(".theZTop",{
+        zIndex:99
+      });
       discoverChanger
       .to(".discover",{
         display:"block"
@@ -1037,6 +1049,9 @@ function themeChangerLight(){
     listImg3Btn.addEventListener("click", listImg3BtnClick)
 
     function listImg4BtnClick(){
+      gsap.to(".theZTop",{
+        zIndex:99
+      });
       discoverChanger
       .to(".discover",{
         display:"block"
@@ -1176,7 +1191,7 @@ function themeChangerLight(){
     {loading && <Loader />}
       <div className="webSite" style={{ display: loading ? "none" : "block" }}>
 
-            <div className="nav fixed top-0 left-0 z-1000">
+            <div className="nav fixed top-0 left-0 z-1000 ">
               <Navbar />
             </div>
 
@@ -1199,127 +1214,128 @@ function themeChangerLight(){
 
           <div className="main relative w-[100vw] h-[auto] ">
 
-        <div className="fixed top-0 left-0  w-[100vw] h-[100vh] z-99">
-          <div className="relative">
-                    <div className="listAll absolute w-[100vw] h-[100vh] top-0 left-0 z-1001 hidden">
-                      <div className="
-                      max-xl:w-[100%]
-                      max-xl:h-[25%]
-                      listImg1 relative w-[25%] h-[100%] ">
-                        <div className="listImg1Btn absolute top-0 left-0 z-111 text-[#00000000] bg-[#00000033] w-[100%] h-[100%] text-[2rem] hover:bg-[#000000cc] hover:text-[white]  transition-[0.5s] uppercase flex justify-center items-center cursor-pointer">
-                          Discover
-                        </div>
-                        <div className=" absolute top-20 left-0 z-110 text-[#fff]  w-[100%] h-[100%] text-[2rem] hover:text-[#ffffff00] uppercase flex justify-center items-center cursor-pointer">
-                          Highlands
-                        </div>
-                        <img className="listImg1Src absolute top-0 left-0 w-[100%] h-[100%]" src="images/scotland2.jpg" alt="" /></div>
-                      <div className="
-                      max-xl:w-[100%]
-                      max-xl:h-[25%]
-                      listImg2 relative w-[25%] h-[100%] ">
-                        <div className="listImg2Btn absolute top-0 left-0 z-111 text-[#00000000] bg-[#00000033] w-[100%] h-[100%] text-[2rem] hover:bg-[#000000cc] hover:text-[white]  transition-[0.5s] uppercase flex justify-center items-center cursor-pointer">
-                          Discover
-                        </div>
-                        <div className=" absolute top-20 left-0 z-110 text-[#fff]  w-[100%] h-[100%] text-[2rem] hover:text-[#ffffff00] uppercase flex justify-center items-center cursor-pointer">
-                          Sahara
-                        </div>
-                        <img className="listImg2Src absolute top-0 left-0 w-[100%] h-[100%]" src="images/sahara4.jpg" alt="" /></div>
-                      <div className="
-                      max-xl:w-[100%]
-                      max-xl:h-[25%]
-                      listImg3 relative w-[25%] h-[100%] ">
-                        <div className="listImg3Btn absolute top-0 left-0 z-111 text-[#00000000] bg-[#00000033] w-[100%] h-[100%] text-[2rem] hover:bg-[#000000cc] hover:text-[white]  transition-[0.5s] uppercase flex justify-center items-center cursor-pointer">
-                          Discover
-                        </div>
-                        <div className=" absolute top-20 left-0 z-110 text-[#fff]  w-[100%] h-[100%] text-[2rem] hover:text-[#ffffff00] uppercase flex justify-center items-center cursor-pointer">
-                          Dolomites
-                        </div>
-                        <img className="listImg3Src absolute top-0 left-0 w-[100%] h-[100%]" src="images/dolomites2.jpg" alt="" /></div>
-                      <div className="
-                      max-xl:w-[100%]
-                      max-xl:h-[25%]
-                      listImg4 relative w-[25%] h-[100%] ">
-                        <div className="listImg4Btn absolute top-0 left-0 z-111 text-[#00000000] bg-[#00000033] w-[100%] h-[100%] text-[2rem] hover:bg-[#000000cc] hover:text-[white]  transition-[0.5s] uppercase flex justify-center items-center cursor-pointer">
-                          Discover
-                        </div>
-                        <div className=" absolute top-20 left-0 z-110 text-[#fff]  w-[100%] h-[100%] text-[2rem] hover:text-[#ffffff00] uppercase flex justify-center items-center cursor-pointer">
-                          Maldives
-                        </div>
-                        <img className="listImg4Src absolute top-0 left-0 w-[100%] h-[100%]" src="images/maldives2.jpg" alt="" /></div>
-                    </div>
+            <div className="theZTop fixed top-0 left-0  w-[100vw] h-[100vh] z-99">
+              <div className="relative">
 
-                    <div className="imgCon absolute top-0 left-0 w-[100vw] h-[100vh] z-10 overflow-hidden ">
-                        <div className="relative w-[100vw] h-[100vh] overflow-hidden">
-                          <img className="
-                          imgIround absolute top-0 object-none left-0 w-[100vw] h-[100vh] z-11" src="images/scotland1.jpg" alt=""/>
-                          <img className="
-                          max-lg:w-[100vw]
-                          max-lg:h-[100vw]
-                          imgArc absolute top-[50%] left-[50%] translate-[-50%] w-[1080px] h-[1080px] object-none rounded-full z-12 brightness-80 " src="images/scotland1.jpg" alt=""/>
-                          <img className="
-                          max-lg:w-[50vw]
-                          max-lg:h-[50vw]
-                          imgCenter absolute top-[50%] left-[50%] translate-[-50%] w-[540px] h-[540px] object-none rounded-full z-13" src="images/scotland1.jpg" alt=""/>
-                        </div>l
-                    </div>
-
-                    <div className="addsCon absolute top-0 left-0 w-[100vw] h-[100vh] z-99 overflow-hidden"> 
-                      <div className="relative w-[100vw] h-[100vh] flex flex-col justify-center items-center text-[var(--tx1)]">
-                        <div className=" overflow-hidden ">
+                        <div className="listAll absolute w-[100vw] h-[100vh] top-0 left-0 z-1001 hidden">
                           <div className="
-                          max-lg:tracking-[20px]
-                          max-sm:tracking-[10px]
-                          max-lg:text-[4rem]
-                          max-sm:text-[2rem]
-                          mainTx1 text-[5rem] tracking-[60px] mt-[80px]">HIGHLANDS</div>
-                        </div>
-                        <hr className="
-                          max-sm:w-[240px]
-                        border-0.5 w-[400px] my-[20px]"/>
-                        <div className=" overflow-hidden  mb-[40px]">
-                          <div className="
-                          max-sm:tracking-[10px]
-                          max-sm:[1.2rem]
-                          mainTx2 text-[1.4rem] tracking-[20px]">SCOTLAND</div>
-                        </div>
-
-                        <div className="middleArrows flex gap-[40px]">
-                          <img className="leftArrow w-[60px] h-[60px]" src="images/half_arrow_left_white.svg" alt="" />
-                          <div className="h-[60px] border-1 border-[var(--tx1)]"></div>
-                          <img className="rightArrow w-[60px] h-[60px]" src="images/half_arrow_right_white.svg" alt="" />
-                        </div>
-
-                        <div className="switcher absolute w-[100vw] h-[120px] px-[40px] flex bottom-10 left-0 items-end justify-between">
-                          <div className="
-                          max-lg:w-[40px]
-                          w-[200px] h-[100px]"></div>
-                          <div className="
-                          max-sm:top-[-100%]
-                          max-lg:top-[-60%]
-                          discoverBtn relative underline uppercase cursor-pointer text-[0.9rem]">
-                            <div className="discoverAnime absolute top-[50%] left-[50%] w-[20px] h-[20px] -translate-y-[50%] -translate-x-[50%] rounded-full bg-[var(--tx1)] opacity-70 hidden"></div>
-                            Discover this destination</div>
-                          <div className="
-                          max-lg:w-[40px]
-                          max-lg:top-[-60%]
-                          max-sm:top-[-40%]
-                          w-[200px] relative flex items-center gap-[20px] text-[0.9rem] z-99 ">
-                            <div className="uppercase max-lg:hidden">
-                              switch
+                          max-xl:w-[100%]
+                          max-xl:h-[25%]
+                          listImg1 relative w-[25%] h-[100%] ">
+                            <div className="listImg1Btn absolute top-0 left-0 z-1002 text-[#00000000] bg-[#00000033] w-[100%] h-[100%] text-[2rem] hover:bg-[#000000cc] hover:text-[white]  transition-[0.5s] uppercase flex justify-center items-center cursor-pointer">
+                              Discover
                             </div>
-                            <div className="w-[30px] h-[0px]  border-1 border-[var(--tx)] max-lg:hidden"></div>
-                            <div className="switchBtn w-[40px] h-[40px] rounded-full bg-white flex justify-center items-center cursor-pointer" >
-                              <img src="images/randomize_icon_black.svg" alt="" />
+                            <div className=" absolute -top-10 left-0 z-1001 text-[#000000]  w-[100%] h-[100%] text-[2rem] hover:text-[#ffffff00] uppercase flex justify-center items-center cursor-pointer">
+                              Highlands
+                            </div>
+                            <img className="listImg1Src absolute top-0 left-0 w-[100%] h-[100%]" src="images/scotland2.jpg" alt="" /></div>
+                          <div className="
+                          max-xl:w-[100%]
+                          max-xl:h-[25%]
+                          listImg2 relative w-[25%] h-[100%] ">
+                            <div className="listImg2Btn absolute top-0 left-0 z-1002 text-[#00000000] bg-[#00000033] w-[100%] h-[100%] text-[2rem] hover:bg-[#000000cc] hover:text-[white]  transition-[0.5s] uppercase flex justify-center items-center cursor-pointer">
+                              Discover
+                            </div>
+                            <div className=" absolute -top-10 left-0 z-1001 text-[#000000]  w-[100%] h-[100%] text-[2rem] hover:text-[#ffffff00] uppercase flex justify-center items-center cursor-pointer">
+                              Sahara
+                            </div>
+                            <img className="listImg2Src absolute top-0 left-0 w-[100%] h-[100%]" src="images/sahara4.jpg" alt="" /></div>
+                          <div className="
+                          max-xl:w-[100%]
+                          max-xl:h-[25%]
+                          listImg3 relative w-[25%] h-[100%] ">
+                            <div className="listImg3Btn absolute top-0 left-0 z-1002 text-[#00000000] bg-[#00000033] w-[100%] h-[100%] text-[2rem] hover:bg-[#000000cc] hover:text-[white]  transition-[0.5s] uppercase flex justify-center items-center cursor-pointer">
+                              Discover
+                            </div>
+                            <div className=" absolute -top-10 left-0 z-1001 text-[#0a0b0a]  w-[100%] h-[100%] text-[2rem] hover:text-[#ffffff00] uppercase flex justify-center items-center cursor-pointer">
+                              Dolomites
+                            </div>
+                            <img className="listImg3Src absolute top-0 left-0 w-[100%] h-[100%]" src="images/dolomites2.jpg" alt="" /></div>
+                          <div className="
+                          max-xl:w-[100%]
+                          max-xl:h-[25%]
+                          listImg4 relative w-[25%] h-[100%] ">
+                            <div className="listImg4Btn absolute top-0 left-0 z-1002 text-[#00000000] bg-[#00000033] w-[100%] h-[100%] text-[2rem] hover:bg-[#000000cc] hover:text-[white]  transition-[0.5s] uppercase flex justify-center items-center cursor-pointer">
+                              Discover
+                            </div>
+                            <div className=" absolute -top-10 left-0 z-1001 text-[#000000cf]  w-[100%] h-[100%] text-[2rem] hover:text-[#ffffff00] uppercase flex justify-center items-center cursor-pointer">
+                              Maldives
+                            </div>
+                            <img className="listImg4Src absolute top-0 left-0 w-[100%] h-[100%]" src="images/maldives2.jpg" alt="" /></div>
+                        </div>
+
+                        <div className="imgCon absolute top-0 left-0 w-[100vw] h-[100vh] z-10 overflow-hidden ">
+                            <div className="relative w-[100vw] h-[100vh] overflow-hidden">
+                              <img className="
+                              imgIround absolute top-0 object-none left-0 w-[100vw] h-[100vh] z-11" src="images/scotland1.jpg" alt=""/>
+                              <img className="
+                              max-lg:w-[100vw]
+                              max-lg:h-[100vw]
+                              imgArc absolute top-[50%] left-[50%] translate-[-50%] w-[1080px] h-[1080px] object-none rounded-full z-12 brightness-80 " src="images/scotland1.jpg" alt=""/>
+                              <img className="
+                              max-lg:w-[50vw]
+                              max-lg:h-[50vw]
+                              imgCenter absolute top-[50%] left-[50%] translate-[-50%] w-[540px] h-[540px] object-none rounded-full z-13" src="images/scotland1.jpg" alt=""/>
+                            </div>l
+                        </div>
+
+                        <div className="addsCon absolute top-0 left-0 w-[100vw] h-[100vh] z-99 overflow-hidden"> 
+                          <div className="relative w-[100vw] h-[100vh] flex flex-col justify-center items-center text-[var(--tx1)]">
+                            <div className=" overflow-hidden ">
+                              <div className="
+                              max-lg:tracking-[20px]
+                              max-sm:tracking-[10px]
+                              max-lg:text-[4rem]
+                              max-sm:text-[2rem]
+                              mainTx1 text-[5rem] tracking-[60px] mt-[80px]">HIGHLANDS</div>
+                            </div>
+                            <hr className="
+                              max-sm:w-[240px]
+                            border-0.5 w-[400px] my-[20px]"/>
+                            <div className=" overflow-hidden  mb-[40px]">
+                              <div className="
+                              max-sm:tracking-[10px]
+                              max-sm:[1.2rem]
+                              mainTx2 text-[1.4rem] tracking-[20px]">SCOTLAND</div>
+                            </div>
+
+                            <div className="middleArrows flex gap-[40px]">
+                              <img className="leftArrow w-[60px] h-[60px]" src="images/half_arrow_left_white.svg" alt="" />
+                              <div className="h-[60px] border-1 border-[var(--tx1)]"></div>
+                              <img className="rightArrow w-[60px] h-[60px]" src="images/half_arrow_right_white.svg" alt="" />
+                            </div>
+
+                            <div className="switcher absolute w-[100vw] h-[120px] px-[40px] flex bottom-10 left-0 items-end justify-between">
+                              <div className="
+                              max-lg:w-[40px]
+                              w-[200px] h-[100px]"></div>
+                              <div className="
+                              max-sm:top-[-100%]
+                              max-lg:top-[-60%]
+                              discoverBtn w-[300px] relative underline uppercase cursor-pointer text-[0.9rem] flex justify-center items-center">
+                                <div className=" discoverAnime absolute top-[50%] left-[50%] w-[20px] h-[20px] -translate-y-[50%] -translate-x-[50%] rounded-full bg-[var(--tx1)] opacity-70 hidden"></div>
+                                Discover this destination</div>
+                              <div className="
+                              max-lg:w-[40px]
+                              max-lg:top-[-60%]
+                              max-sm:top-[-40%]
+                              w-[200px] relative flex items-center gap-[20px] text-[0.9rem] z-99 ">
+                                <div className="uppercase max-lg:hidden">
+                                  switch
+                                </div>
+                                <div className="w-[30px] h-[0px]  border-1 border-[var(--tx)] max-lg:hidden"></div>
+                                <div className="switchBtn w-[40px] h-[40px] rounded-full bg-white flex justify-center items-center cursor-pointer" >
+                                  <img src="images/randomize_icon_black.svg" alt="" />
+                                </div>
+                              </div>
                             </div>
                           </div>
+
                         </div>
-                      </div>
+            </div>
+            </div>
 
-                    </div>
-        </div>
-        </div>
-
-                <div className="discover absolute top-[100vh] left-[0] w-[100vw] h-[auto] z-100 hidden">
+            <div className="discover absolute top-[100vh] left-[0] w-[100vw] h-[auto] z-100 hidden">
                   <div id="scrollToHere"></div>
 
                   <div className="discoverCon1 relative w-[100vw] h-[auto] z-99 ">
@@ -1738,7 +1754,8 @@ function themeChangerLight(){
                     </div>
                   </div>
 
-                </div>
+            </div>
+
           </div>
 
       </div>
