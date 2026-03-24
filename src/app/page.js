@@ -1201,7 +1201,7 @@ function themeChangerLight(){
 
         <div className="fixed top-0 left-0  w-[100vw] h-[100vh] z-99">
           <div className="relative">
-                    <div className="listAll absolute w-[100vw] h-[100vh] top-0 left-0 z-100 hidden">
+                    <div className="listAll absolute w-[100vw] h-[100vh] top-0 left-0 z-1001 hidden">
                       <div className="
                       max-xl:w-[100%]
                       max-xl:h-[25%]
@@ -1292,12 +1292,9 @@ function themeChangerLight(){
                         <div className="switcher absolute w-[100vw] h-[120px] px-[40px] flex bottom-10 left-0 items-end justify-between">
                           <div className="
                           max-lg:w-[40px]
-                          max-sm:hidden
                           w-[200px] h-[100px]"></div>
                           <div className="
                           max-sm:top-[-100%]
-                          max-sm:left-[50%]
-                          max-sm:translate-x-[-50%]
                           max-lg:top-[-60%]
                           discoverBtn relative underline uppercase cursor-pointer text-[0.9rem]">
                             <div className="discoverAnime absolute top-[50%] left-[50%] w-[20px] h-[20px] -translate-y-[50%] -translate-x-[50%] rounded-full bg-[var(--tx1)] opacity-70 hidden"></div>
@@ -1328,7 +1325,7 @@ function themeChangerLight(){
                   <div className="discoverCon1 relative w-[100vw] h-[auto] z-99 ">
                     <div className="anchor1
                     max-lg:pt-[100px]
-                    absolute top-0 left-0 w-[100vw] h-[auto] bg-[#ffffffcc] flex flex-col items-center pt-[140px] text-[var(--tx1)] ">
+                    absolute top-0 left-0 w-[100vw] h-[auto] bg-[#ffffffcc] flex flex-col items-center pt-[140px] pb-[50px] text-[var(--tx1)] ">
                       <div className="
                       max-sm:text-[1.2rem]
                       max-sm:tracking-[8px]
@@ -1432,7 +1429,7 @@ function themeChangerLight(){
                   <div className="discoverCon2 relative w-[100vw] h-[auto] z-99 hidden">
                     <div className="
                     max-lg:pt-[100px]
-                    discoverFirstCon absolute top-0 left-0 w-[100vw] h-[auto] bg-[#ffffffcc] flex flex-col items-center pt-[140px] text-[var(--tx1)]">
+                    discoverFirstCon absolute top-0 left-0 w-[100vw] h-[auto] bg-[#ffffffcc] flex flex-col items-center pt-[140px] pb-[50px]  text-[var(--tx1)]">
                       <div className="
                       max-sm:text-[1.2rem]
                       max-sm:tracking-[8px]
@@ -1536,7 +1533,7 @@ function themeChangerLight(){
                   <div className="discoverCon3 relative w-[100vw] h-[auto] z-99 hidden">
                     <div className="
                     max-lg:pt-[100px]
-                    discoverFirstCon absolute top-0 left-0 w-[100vw] h-[auto] bg-[#ffffffcc] flex flex-col items-center pt-[140px] text-[var(--tx1)]">
+                    discoverFirstCon absolute top-0 left-0 w-[100vw] h-[auto] bg-[#ffffffcc] flex flex-col items-center pt-[140px] pb-[50px]  text-[var(--tx1)]">
                       <div className="
                       max-sm:text-[1.2rem]
                       max-sm:tracking-[8px]
@@ -1640,7 +1637,7 @@ function themeChangerLight(){
                   <div className="discoverCon4 relative w-[100vw] h-[auto] z-99 hidden">
                     <div className="
                     max-lg:pt-[100px]
-                    discoverFirstCon absolute top-0 left-0 w-[100vw] h-[auto] bg-[#ffffffcc] flex flex-col items-center pt-[140px] text-[var(--tx1)]">
+                    discoverFirstCon absolute top-0 left-0 w-[100vw] h-[auto] bg-[#ffffffcc] flex flex-col items-center pt-[140px] pb-[50px]  text-[var(--tx1)]">
                       <div className="
                       max-sm:text-[1.2rem]
                       max-sm:tracking-[8px]
