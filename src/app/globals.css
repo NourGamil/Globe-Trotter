@@ -1,9 +1,5 @@
 @import "tailwindcss";
-<<<<<<< HEAD
 ::-webkit-scrollbar { display: none; }
-=======
-::-webkit-scrollbar { display: none; } 
->>>>>>> 0af879a5ccf1a5fe7e84b15239664a72d9596499
 :root {
   --background: #ffffff;
   --foreground: #171717;
