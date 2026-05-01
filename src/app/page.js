@@ -39,6 +39,7 @@ export default function Home() {
   let discoverBtn = document.querySelector(".discoverBtn")
   let backBtn = document.querySelector(".backBtn")
   let listAllBtn = document.querySelector(".listAllBtn")
+
   let listImg1Btn = document.querySelector(".listImg1Btn")
   let listImg2Btn = document.querySelector(".listImg2Btn")
   let listImg3Btn = document.querySelector(".listImg3Btn")
@@ -608,6 +609,8 @@ function themeChangerLight(){
     backBtn.addEventListener("click", backBtnClick)
 
     function listAllBtnClick(){
+              gsap.to(".addsCon",{display:"block",duration:0.5},"-=0.5")
+              gsap.to(".contactUsCon",{display:"none",opacity:0,duration:0.5})   
         gsap.to(".theZTop",{
           zIndex:1001
         })
@@ -1305,21 +1308,23 @@ function themeChangerLight(){
                               <img className="rightArrow w-[60px] h-[60px]" src="images/half_arrow_right_white.svg" alt="" />
                             </div>
 
-                            <div className="switcher absolute w-[100vw] h-[120px] px-[40px] flex bottom-10 left-0 items-end justify-between">
+                            <div className="
+                            max-sm:bottom-10
+                            switcher absolute w-[100vw] h-[120px] px-[40px] flex bottom-28 left-0 items-end justify-between">
                               <div className="
                               max-lg:w-[40px]
                               w-[200px] h-[100px]"></div>
                               <div className="
                               max-sm:top-[-100%]
                               max-lg:top-[-60%]
-                              discoverBtn w-[300px] relative underline uppercase cursor-pointer text-[0.9rem] flex justify-center items-center">
-                                <div className=" discoverAnime absolute top-[50%] left-[50%] w-[20px] h-[20px] -translate-y-[50%] -translate-x-[50%] rounded-full bg-[var(--tx1)] opacity-70 hidden"></div>
+                              discoverBtn w-[300px] relative underline uppercase cursor-pointer text-[0.9rem] flex justify-center items-center hover:text-lime-400">
+                                <div className=" discoverAnime absolute top-[50%] left-[50%] w-[20px] h-[20px] -translate-y-[50%] -translate-x-[50%] rounded-full bg-[var(--tx1)] opacity-70 hidden "></div>
                                 Discover this destination</div>
                               <div className="
                               max-lg:w-[40px]
                               max-lg:top-[-60%]
                               max-sm:top-[-40%]
-                              w-[200px] relative flex items-center gap-[20px] text-[0.9rem] z-99 ">
+                              w-[200px] relative flex items-center gap-[20px] text-[0.9rem] z-99 hover:text-lime-400">
                                 <div className="uppercase max-lg:hidden">
                                   switch
                                 </div>
