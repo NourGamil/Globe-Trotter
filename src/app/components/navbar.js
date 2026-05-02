@@ -212,35 +212,21 @@ document.querySelector(".backBtnContact").addEventListener("click",
                         
                     </Link>
                     </li>
-                    {/* <li className=" ">
-                    <Link
-                        href={"/"}
-                        className={`hover:text-lime-400 transition navBtns`}
+                    <li className="w-[200px] flex justify-center items-center listAllBtnMenu hover:text-lime-400 transition navBtns"
                         onClick={()=>{
                         setOpen(false)
                         }}
                     >
-                        About
-                    </Link>
-                    </li> */}
-                    <li className="w-[200px] flex justify-center items-center">
-                    <Link
-                        href={"/"}
-                        className={`listAllBtnMenu hover:text-lime-400 transition navBtns`}
-                        onClick={()=>{
-                        setOpen(false)
-                        }}
-                    >
+
                         Destinations
-                    </Link>
+
                     </li>
-                    <li className="w-[200px] flex justify-center items-center">
-                    <Link
-                        href={"/"}
-                        className={`contactUsBtn hover:text-lime-400 transition navBtns`}
+                    <li className="w-[200px] flex justify-center items-center contactUsBtn hover:text-lime-400 transition navBtns"
+                        onClick={()=>{
+                        setOpen(false)
+                        }}
                     >
                         Contact Us
-                    </Link>
                     </li>
 
                 
