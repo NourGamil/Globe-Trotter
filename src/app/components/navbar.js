@@ -37,6 +37,8 @@ export default function Navbar(){
         let listAllBtnMenu = document.querySelector(".listAllBtnMenu");
         let mainTllistAll = gsap.timeline();
         let mm = gsap.matchMedia();
+        const root = document.documentElement;    
+
         document.querySelector(".menuBtn").addEventListener("click",()=>{
 
                 if(menuSwitch == false)
@@ -149,6 +151,35 @@ document.querySelector(".contactUsBtn").addEventListener("click",
                         .to(".nav",{
                         background:"#00000000"
                         })
+                        setTimeout(()=>{
+                            root.style.setProperty('--tx1', "white");
+                    gsap.to(".menuSvg",{
+                        attr:{
+                        src:"images/menu.svg"
+                        }
+                    });
+                        gsap.to(".searchSvg",{
+                        attr:{
+                        src:"images/search.svg"
+                        }
+                    });
+                        gsap.to(".shareSvg",{
+                        attr:{
+                        src:"images/share.svg"
+                        }
+                    })
+                        gsap.to(".leftArrow",{
+                        attr:{
+                        src:"images/half_arrow_left_white.svg"
+                        }
+                    })
+                        gsap.to(".rightArrow",{
+                        attr:{
+                        src:"images/half_arrow_right_white.svg"
+                        }
+                    })
+                        },1500);
+
                         menuSwitch = false;
                         setOpen(false);
 
