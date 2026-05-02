@@ -273,7 +273,7 @@ document.querySelector(".backBtnContact").addEventListener("click",
                     <div className="flex flex-col justify-center">
                     
                     <h1 className="
-                    max-sm:text-5xl
+                    max-sm:text-4xl
                     text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-8">
                         Contact Us
                     </h1>
